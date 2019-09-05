@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Periodo:</strong>
+  <%= @resultado.periodo %>
+</p>
+
+<p>
+  <strong>Valor meta:</strong>
+  <%= @resultado.valor_meta %>
+</p>
+
+<p>
+  <strong>Valor realizado:</strong>
+  <%= @resultado.valor_realizado %>
+</p>
+
+<%= link_to 'Edit', edit_resultado_path(@resultado) %> |
+<%= link_to 'Back', resultados_path %>

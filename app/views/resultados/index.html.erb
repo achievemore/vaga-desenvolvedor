@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Resultados</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Periodo</th>
+      <th>Valor meta</th>
+      <th>Valor realizado</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @resultados.each do |resultado| %>
+      <tr>
+        <td><%= resultado.periodo %></td>
+        <td><%= resultado.valor_meta %></td>
+        <td><%= resultado.valor_realizado %></td>
+        <td><%= link_to 'Show', resultado %></td>
+        <td><%= link_to 'Edit', edit_resultado_path(resultado) %></td>
+        <td><%= link_to 'Destroy', resultado, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Resultado', new_resultado_path %>

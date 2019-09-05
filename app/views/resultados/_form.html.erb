@@ -1,0 +1,32 @@
+<%= form_with(model: resultado, local: true) do |form| %>
+  <% if resultado.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(resultado.errors.count, "error") %> prohibited this resultado from being saved:</h2>
+
+      <ul>
+      <% resultado.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :periodo %>
+    <%= form.date_select :periodo %>
+  </div>
+
+  <div class="field">
+    <%= form.label :valor_meta %>
+    <%= form.text_field :valor_meta %>
+  </div>
+
+  <div class="field">
+    <%= form.label :valor_realizado %>
+    <%= form.text_field :valor_realizado %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
