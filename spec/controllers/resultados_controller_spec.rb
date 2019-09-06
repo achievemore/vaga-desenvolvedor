@@ -70,7 +70,7 @@ RSpec.describe ResultadosController, type: :controller do
   end
 
   describe "Teste final!" do
-    it "Qual a resposta para tudo?" do
+    it "qual a resposta para a vida o universo e tudo mais?" do
       resposta = Base64.encode64("ESCREVA AQUI A RESPOSTA")
       expect("NDI=\n").to eq(resposta)
     end
