@@ -1,5 +1,9 @@
 # DESENVOLVEDOR JR
 
+## Demonstração
+
+[![asciicast](docs/demonstracao.svg)]()
+
 ## Teste para a vaga de desenvolvedor Jr
 
 Siga o passo a passo abaixo para a instalação e execução do código de teste para a vaga de desenvolvedor Jr.
@@ -47,9 +51,9 @@ O código fonte desse teste está escrito em Ruby, usando um scaffold de uma app
 
 ### 3. Provisionamento do Rails
 
-  3.1 Então digite o abaixo tecle enter, para criar um container e acessar o seu shell:
+  3.1 Digite o comando abaixo, então tecle enter para criar um container e acessar o seu shell:
   ```bash
-  $ docker run --rm -w /app -it achievemore-ruby /bin/sh
+  $ docker run --rm -v `pwd`:/app -w /app -it achievemore-ruby /bin/sh
   ```
 
   3.2 Para criar as tabelas de teste, execute:
@@ -63,4 +67,3 @@ O código fonte desse teste está escrito em Ruby, usando um scaffold de uma app
   ```bash
   $ bundle exec rspec
   ```
-
