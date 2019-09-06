@@ -8,7 +8,7 @@ Siga o passo a passo abaixo para a instalação e execução do código de teste
 
 O código fonte desse teste está escrito em Ruby, usando um scaffold de uma app básica do framework Rails. O teste se baseia em instalar a aplicação e executa-lá em seu ambiente de desenvolvimento, escrever alguns testes que estão pendentes e corrigir outros conforme alerta do console.
 
-### Passos para instalação:
+## Passos para instalação:
 
 #### Requerimentos:
 
@@ -24,13 +24,43 @@ O código fonte desse teste está escrito em Ruby, usando um scaffold de uma app
 * RSPEC
 * Git / Github
 
-### Passo 1: Clonar Repositório
-  > git clone git@github.com:achievemore/vaga-desenvolvedor-jr.git
+### 1. Clonar Repositório
 
-### Passo 2: Rodar migration e executar testes
-  > cd vaga-desenvolvedor-jr
-  >
-  > rails db:migrate
-  >
-  > bundle exec rspec
+  1.1 Para baixar o repositório, execute:
+  ```bash
+  $ git clone git@github.com:achievemore/vaga-desenvolvedor-jr.git
+  ```
+
+### 2. Fazer Build da Imagem Docker
+
+  2.1 Para entrar na pasta do projeto, digite:
+  ```bash
+  $ cd vaga-desenvolvedor-jr
+  ```
+
+  2.2 Para fazer a build da Imagem, execute:
+  ```bash
+  $ docker build -t achievemore-ruby .
+  ```
+
+
+
+### 3. Provisionamento do Rails
+
+  3.1 Então digite o abaixo tecle enter, para criar um container e acessar o seu shell:
+  ```bash
+  $ docker run --rm -w /app -it achievemore-ruby /bin/sh
+  ```
+
+  3.2 Para criar as tabelas de teste, execute:
+  ```bash
+  $ bundle exec rails db:migrate
+  ```
+
+### 4. Rodar os Testes
+
+  4.1 Agora rode os testes da seguinte forma:
+  ```bash
+  $ bundle exec rspec
+  ```
 
