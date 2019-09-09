@@ -2,7 +2,6 @@ require 'rails_helper'
 require 'calculos'
 
 RSpec.describe Calculos, type: :lib do
-
   describe "Calcula performance" do
     it "com atributos validos" do
       valor_performance = Calculos.performance(100.5, 150.5)
