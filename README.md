@@ -70,7 +70,3 @@ O código fonte desse teste está escrito em Ruby, usando um scaffold de uma app
   ```bash
   $ bundle exec rspec
   ```
-
-## Screecast
-
-[![asciicast](https://asciinema.org/a/266410.svg)](https://asciinema.org/a/266410)
