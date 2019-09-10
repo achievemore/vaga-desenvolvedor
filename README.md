@@ -1,3 +1,5 @@
+![AchieveMore](https://repository-images.githubusercontent.com/206639778/70226b80-d327-11e9-9bc8-b1024837da4c)
+
 # DESENVOLVEDOR JR
 
 ## Demonstração
@@ -10,11 +12,9 @@ Siga o passo a passo abaixo para a instalação e execução do código de teste
 
 ### Detalhes do teste:
 
-O código fonte desse teste está escrito em Ruby, usando um scaffold de uma app básica do framework Rails. O teste se baseia em instalar a aplicação e executa-lá em seu ambiente de desenvolvimento, escrever alguns testes que estão pendentes e corrigir outros conforme alerta do console.
+O código fonte desse teste está escrito em Ruby, usando um scaffold de uma app básica do framework Rails. O teste se baseia em instalar a aplicação e executa-lá em seu ambiente de desenvolvimento, escrever alguns testes que estão pendentes e corrigir outros conforme alertas do console.
 
-### Após finalizar o teste
-
-
+O candidato deve dar **fork** neste repositório e após o termino do desenvolvimento, realizar um **pull request** para análise do time.
 
 ## Passos para instalação:
 
@@ -40,7 +40,7 @@ O código fonte desse teste está escrito em Ruby, usando um scaffold de uma app
   $ git clone git@github.com:achievemore/vaga-desenvolvedor-jr.git
   ```
 
-### 2. Fazer Build da Imagem Docker (ou executar da maneira que achar desejavel)
+### 2. Fazer Build da Imagem Docker (ou executar da maneira que achar desejável)
 
   2.1 Para entrar na pasta do projeto, digite:
   ```bash
@@ -54,7 +54,7 @@ O código fonte desse teste está escrito em Ruby, usando um scaffold de uma app
 
 ### 3. Provisionamento do Rails
 
-  3.1 Digite o comando abaixo, então tecle enter para criar um container e acessar o seu shell:
+  3.1 Digite o comando abaixo, então tecle enter para criar um container e acessar o seu shell (caso esteja usando docker):
   ```bash
   $ docker run --rm -v `pwd`:/app -w /app -it achievemore-ruby /bin/sh
   ```
@@ -70,6 +70,12 @@ O código fonte desse teste está escrito em Ruby, usando um scaffold de uma app
   ```bash
   $ bundle exec rspec
   ```
+
+## Recomendações finais
+
+* Não iremos considerar entregas após o prazo combinado;
+* O horário do pull-request ou do seu último commit será o horário considerado para a entrega;
+* Nossa avaliação não será apenas por fazer todos os testes, daremos grande valor para sua criatividade e possíveis melhorias do código.
 
 ## Screecast
 
