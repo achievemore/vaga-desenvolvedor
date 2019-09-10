@@ -76,7 +76,3 @@ O candidato deve dar **fork** neste repositório e após o termino do desenvolvi
 * Não iremos considerar entregas após o prazo combinado;
 * O horário do pull-request ou do seu último commit será o horário considerado para a entrega;
 * Nossa avaliação não será apenas por fazer todos os testes, daremos grande valor para sua criatividade e possíveis melhorias do código.
-
-## Screecast
-
-[![asciicast](https://asciinema.org/a/266410.svg)](https://asciinema.org/a/266410)
