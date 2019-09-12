@@ -16,6 +16,8 @@ O código fonte desse teste está escrito em Ruby, usando um scaffold de uma app
 
 O candidato deve dar **fork** neste repositório e após o termino do desenvolvimento, realizar um **pull request** para análise do time. O tempo para realizar o teste será de 48 horas a partir do momento que realizar o fork do projeto.
 
+Pedimos que trabalhe sozinho e não divulgue o resultado na internet.
+
 ## Passos para instalação:
 
 #### Requerimentos:
@@ -76,3 +78,6 @@ O candidato deve dar **fork** neste repositório e após o termino do desenvolvi
 * Não iremos considerar entregas após o prazo combinado;
 * O horário do pull-request ou do seu último commit será o horário considerado para a entrega;
 * Nossa avaliação não será apenas por fazer todos os testes, daremos grande valor para sua criatividade e possíveis melhorias do código.
+
+
+# BOA SORTE!
