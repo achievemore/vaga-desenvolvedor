@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe ResultadosController, type: :controller do
+  let(:arquivo_valido) { { file: fixture_file_upload('metas_validas.csv', 'text/csv') } }
+
   let(:cliente) {
     create(:cliente)
   }
