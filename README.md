@@ -14,7 +14,7 @@ Siga o passo a passo abaixo para a instalação e execução do código de teste
 
 O código fonte desse teste está escrito em Ruby, usando um scaffold de uma app básica do framework Rails. O teste se baseia em instalar a aplicação e executa-lá em seu ambiente de desenvolvimento, escrever alguns testes que estão pendentes e corrigir outros conforme alertas do console.
 
-O candidato deve dar **fork** neste repositório e após o termino do desenvolvimento, realizar um **pull request** para análise do time. O tempo para realizar o teste será de 48 horas a partir do momento que realizar o fork do projeto.
+O candidato deve dar **fork** neste repositório e após o termino do desenvolvimento, realizar um **pull request** para análise do time. Não deixe para fazer o commit apenas no final, nossa equipe irá avaliar seu código desde o seu primeiro commit.
 
 Pedimos que trabalhe sozinho e não divulgue o resultado na internet.
 
