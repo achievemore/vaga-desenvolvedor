@@ -42,14 +42,15 @@ RSpec.describe ResultadosController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        {cliente_id: Cliente.last, periodo: Date.today, valor_meta: 5, valor_realizado: 10}
       }
 
       it "updates the requested resultado" do
         resultado = Resultado.create! valid_attributes
-        put :update, params: {id: resultado.to_param, resultado: new_attributes}, session: valid_session
-        resultado.reload
-        skip("Add assertions for updated state")
+        expect{
+          put :update, params: {id: resultado.to_param, resultado: new_attributes}, session: valid_session
+          resultado.reload
+        }.to change(resultado, :valor_meta).from(10).to(5)
       end
 
       it "renders a JSON response with the resultado" do
