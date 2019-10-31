@@ -37,7 +37,10 @@ RSpec.describe ClientesController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        @cliente = Cliente.find(params[:new_attributes])
+        @cliente.update(title: params[:new_attributes], description: params[:new_at]])
+        redirect_to article_path(@article)
+      #skip("Add a hash of attributes valid for your model")
       }
 
       it "updates the requested cliente" do
@@ -46,6 +49,8 @@ RSpec.describe ClientesController, type: :controller do
         cliente.reload
         skip("Add assertions for updated state")
       end
+
+      
 
       it "renders a JSON response with the cliente" do
         cliente = Cliente.create! valid_attributes

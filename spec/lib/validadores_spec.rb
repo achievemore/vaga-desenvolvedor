@@ -11,31 +11,44 @@ RSpec.describe Validadores, type: :lib do
       end
 
       it "validador data (YYYY-MM)" do
-        skip("escreva testes para esses casos")
+        data = Validadores.data('2019-31')
+
+        expect(data).to eq(true)
+
       end
 
       it "validador para data (DD/MM/YYYY)" do
-        skip("escreva testes para esses casos")
+        data = Validadores.data('12-31-2019')
+
+        expect(data).to eq(true)
       end
     end
 
     context "número" do
       it "validador número inteiro" do
-        skip("escreva testes para esses casos")
+        valor = Validadores.valor('1')
+
+        expect(int).to eq('1')
       end
 
       it "validador número decimal" do
-        skip("escreva testes para esses casos")
+        valor = Validadores.valor('3.14')
+
+        expect(float).to eq('3.14')
       end
 
       it "validador número percentual" do
-        skip("escreva testes para esses casos")
+        valor = Validadores.valor('0.25')
+
+        expect(number*percent).should_be eq('25%')
       end
     end
 
     context "diversos" do
       it "validador e-mail" do
-        skip("escreva testes para esses casos")
+        email = Validadores.email('archvermore@gmail.com')
+
+        expect(email).to eq('archvemore@gmail.com')
       end
     end
   end
