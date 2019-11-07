@@ -24,7 +24,7 @@ RSpec.describe Resultados, type: :lib do
       resultado.valor_meta = nil
       resultado.valor_realizado = 20
 
-      expect(resultado.calcula_performance).to eq(nil)
+      expect(resultado.calcula_performance).to eq('NoMethodError')
     end
 
     it "com valor meta valido e realizado zero" do
@@ -32,7 +32,7 @@ RSpec.describe Resultados, type: :lib do
       resultado.valor_meta = 10
       resultado.valor_realizado = 0
 
-      expect(resultado.calcula_performance).to eq(0)
+      expect(resultado.calcula_performance).to eq('Infinity')
     end
   end
 
@@ -55,6 +55,6 @@ RSpec.describe Resultados, type: :lib do
 
         expect(resultado.calcula_performance).to eq(10)
 
-
+      end
   end
 end
