@@ -1,5 +1,6 @@
 require 'rails_helper'
 require 'resultados'
+require 'spec_helper'
 
 RSpec.describe Resultados, type: :lib do
   describe "Calcula performance" do
@@ -56,5 +57,6 @@ RSpec.describe Resultados, type: :lib do
         expect(resultado.calcula_performance).to eq(10)
 
       end
+    end
   end
 end

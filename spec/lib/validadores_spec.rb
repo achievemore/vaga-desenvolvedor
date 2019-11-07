@@ -1,5 +1,6 @@
 require 'rails_helper'
 require 'validadores'
+require 'spec_helper'
 
 RSpec.describe Validadores, type: :lib do
   describe "Validadores" do

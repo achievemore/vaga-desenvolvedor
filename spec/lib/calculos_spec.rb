@@ -1,5 +1,6 @@
 require 'rails_helper'
 require 'calculos'
+require 'spec_helper'
 
 RSpec.describe Calculos, type: :lib do
   describe "Calcula performance" do

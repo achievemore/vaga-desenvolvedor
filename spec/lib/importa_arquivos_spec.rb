@@ -2,6 +2,7 @@ require 'rails_helper'
 require 'csv'
 require 'validadores'
 require 'resultados'
+require 'spec_helper'
 
 include ActionDispatch::TestProcess::FixtureFile
 
@@ -50,12 +51,13 @@ RSpec.describe Validadores, type: :lib do
 
         CSV.foreach(@file, {headers: true, header_converters: :symbol, col_sep: ';'}) do |row|
           break unless Validadores.data(row[:periodo])
-          if(:periodo =! null){
+          if(:periodo != null)
           cliente = Cliente.create!(nome: row[:cliente])
           cliente.resultado.create!(periodo: row[:periodo], valor_meta: row[:valor_meta], valor_realizado: row[:valor_realizado])
-        }
-        skip("escreva testes para esses casos")
+          end
+          #skip("escreva testes para esses casos")
 
+        end
       end
     end
   end

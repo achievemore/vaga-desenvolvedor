@@ -46,7 +46,7 @@ RSpec.describe ClientesController, type: :controller do
         expect{
         put :update, params: {id: cliente.to_param, cliente: new_attributes}, session: valid_session
         cliente.reload
-      }to change(cliente, :nome).to("Presentino")
+      }.to change(cliente, :nome).to("Presentino")
         
       end
 
