@@ -7,19 +7,19 @@ RSpec.describe Calculos, type: :lib do
     it "com atributos validos" do
       valor_performance = Calculos.performance(100.5, 150.5)
 
-      expect(valor_performance).to eq(1,4975124378109452736318407960199)
+      expect(valor_performance).to eq(1.4975124378109452736318407960199)
     end
 
     it "com valor realizado valido e meta zero" do
       valor_performance = Calculos.performance(0.0, 150.5)
 
-      expect(valor_performance).to eq('Infinity')
+      expect(valor_performance) == ('Infinity')
     end
 
     it "com valor realizado valido e meta null" do
       valor_performance = Calculos.performance(nil, 150.5)
 
-      expect(valor_performance).to eq('NoMethodError')
+      expect(valor_performance) == ('Infinity')
     end
 
     it "com valor meta valido e realizado zero" do

@@ -2,7 +2,6 @@ require 'rails_helper'
 require 'csv'
 require 'validadores'
 require 'resultados'
-require 'spec_helper'
 
 include ActionDispatch::TestProcess::FixtureFile
 
@@ -25,39 +24,41 @@ RSpec.describe Validadores, type: :lib do
       end
 
       it "salva arquivo na base e calcula performance total" do
+         @file = File.open(arquivo_valido[:file])
 
-        CSV.foreach(@file, {headers: true, header_converters: :symbol, col_sep: ';'}) do |row|
-           cliente.resultado.create!(periodo: row[:periodo], valor_meta: row[:valor_meta], valor_realizado: row[:valor_realizado])
-
-# @file = File.open(arquivo_valido[:file])
-        # CSV.foreach(@file, {headers: true, header_converters: :symbol, col_sep: ';'}) do |row|
-        #   cliente = Cliente.create!(nome: row[:cliente])
-        #   cliente.resultado.create!(periodo: row[:periodo], valor_meta: row[:valor_meta], valor_realizado: row[:valor_realizado])
-        # end
-
+         CSV.foreach(@file, {headers: true, header_converters: :symbol, col_sep: ';'}) do |row|
+          cliente = Cliente.create!(nome: row[:cliente])
+          cliente.resultado.create!(periodo: row[:periodo], valor_meta: row[:valor_meta], valor_realizado: row[:valor_realizado])
          end
-        skip("escreva testes para esses casos")
+        expect(:nome)
+        #skip("escreva testes para esses casos")
       end
     end
 
     context "Arquivo invalido" do
       it "validando datas" do
-        break unless Validadores.data(row[:periodo])
-
-        skip("escreva testes para esses casos")
-      end
-
-      it "inserindo linhas na base somente se arquivo valido" do
+        @file = File.open(arquivo_invalido[:file])
 
         CSV.foreach(@file, {headers: true, header_converters: :symbol, col_sep: ';'}) do |row|
           break unless Validadores.data(row[:periodo])
-          if(:periodo != null)
           cliente = Cliente.create!(nome: row[:cliente])
           cliente.resultado.create!(periodo: row[:periodo], valor_meta: row[:valor_meta], valor_realizado: row[:valor_realizado])
-          end
-          #skip("escreva testes para esses casos")
+            
+      end
+        expect(:nome)
+    end
 
+      it "inserindo linhas na base somente se arquivo valido" do
+        @file = File.open(arquivo_valido[:file])
+
+        CSV.foreach(@file, {headers: true, header_converters: :symbol, col_sep: ';'}) do |row|
+          break unless Validadores.data(row[:periodo])
+          break unless Validadores.data(row[:valor_meta])
+          break unless Validadores.data(row[:valor_realizado])
+          cliente = Cliente.create!(nome: row[:cliente])
+        cliente.resultado.create!(periodo: row[:periodo], valor_meta: row[:valor_meta], valor_realizado: row[:valor_realizado])
         end
+        expect(:nome)
       end
     end
   end
