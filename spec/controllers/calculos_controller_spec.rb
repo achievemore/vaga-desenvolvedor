@@ -13,7 +13,9 @@ RSpec.describe CalculosController, type: :controller do
     { cliente_id: cliente.id, periodo: Date.today, valor_meta: 0.0, valor_realizado: 12.7 }
   }
 
-  let(:valid_session) { {} }
+  let(:valid_session) { {
+    
+  } }
 
   describe "GET #performance" do
     it "com atributos validos" do
