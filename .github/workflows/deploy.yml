@@ -32,7 +32,7 @@ jobs:
 
       - name: Create DB
         run: |
-          bin/rails db:prepare
+          bundle exec rake db:migrate
 
       - name: Run tests
         env:
