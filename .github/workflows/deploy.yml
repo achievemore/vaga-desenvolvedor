@@ -3,10 +3,8 @@ name: Main
 on: [push]
 
 jobs:
-  vm-job:
-    name: CI
-    runs-on: ubuntu-18.04
-    # https://help.github.com/en/articles/workflow-syntax-for-github-actions#jobsjob_idstrategymatrix
+  test:
+    runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
@@ -17,35 +15,27 @@ jobs:
         # set N-1 indexes for parallel jobs
         # When you run 2 parallel jobs then first job will have index 0, the second job will have index 1 etc
         ci_node_index: [0, 1]
+    env:
+      RAILS_ENV: test
+      GEMFILE_RUBY_VERSION: 2.6.8
 
     steps:
-    - name: Checkout
-      uses: actions/checkout@v1
-      with:
-        fetch-depth: 1
+      - uses: actions/checkout@v2
 
-    - name: Set up Ruby 2.6.8
-      uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: 2.6.8
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          # Not needed with a .ruby-version file
+          ruby-version: 2.6.8
+          # runs 'bundle install' and caches installed gems automatically
+          bundler-cache: true
 
-    - uses: actions/cache@v1
-      with:
-        path: vendor/bundle
-        key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-gems-
-    - name: Bundle Install and Create DB
-      env:
-        RAILS_ENV: test
-      run: |
-        gem install bundler --version 2.2.16
-        bundle config path vendor/bundle
-        bundle install
-        create DB for Rails 5.x
-        bin/rails db:setup
-    - name: Run tests
-      env:
-        RAILS_ENV: test
-      run: |
-        bundle exec rspec
+      - name: Create DB
+        run: |
+          bin/rails db:prepare
+
+      - name: Run tests
+        env:
+          RAILS_ENV: test
+        run: |
+          bundle exec rspec
