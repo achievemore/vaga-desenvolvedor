@@ -78,6 +78,6 @@ Pedimos que trabalhe sozinho e não divulgue o resultado na internet.
 * Não iremos considerar entregas após o prazo combinado;
 * O horário do pull-request ou do seu último commit será o horário considerado para a entrega;
 * Nossa avaliação não será apenas por fazer todos os testes, daremos grande valor para sua criatividade e possíveis melhorias do código.
-
+* Atualizar a versão do ruby e do rails será um diferencial.
 
 # BOA SORTE!
