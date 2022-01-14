@@ -1,0 +1,51 @@
+name: Main
+
+on: [push]
+
+jobs:
+  vm-job:
+    name: CI
+    runs-on: ubuntu-18.04
+    # https://help.github.com/en/articles/workflow-syntax-for-github-actions#jobsjob_idstrategymatrix
+    strategy:
+      fail-fast: false
+      matrix:
+        # Set N number of parallel jobs you want to run tests on.
+        # Use higher number if you have slow tests to split them on more parallel jobs.
+        # Remember to update ci_node_index below to 0..N-1
+        ci_node_total: [2]
+        # set N-1 indexes for parallel jobs
+        # When you run 2 parallel jobs then first job will have index 0, the second job will have index 1 etc
+        ci_node_index: [0, 1]
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+      with:
+        fetch-depth: 1
+
+    - name: Set up Ruby 2.6.8
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 2.6.8
+
+    - uses: actions/cache@v1
+      with:
+        path: vendor/bundle
+        key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-gems-
+    - name: Bundle Install and Create DB
+      env:
+        RAILS_ENV: test
+      run: |
+        gem install bundler --version 2.2.16
+        bundle config path vendor/bundle
+        bundle install --jobs 4 --retry 3 --path vendor/bundle
+        create DB for Rails 5.x
+        bin/rails db:setup
+    - name: Run tests
+      env:
+        RAILS_ENV: test
+      run: |
+        bundle exec rspec

@@ -1,6 +1,6 @@
-FROM ruby:2.5-alpine
+FROM ruby:2.6-alpine
 
-LABEL Name=achievemore-ruby Version=2.5
+LABEL Name=achievemore-ruby Version=2.6
 
 WORKDIR /app
 
