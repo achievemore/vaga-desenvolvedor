@@ -38,8 +38,8 @@ RSpec.describe ClientesController, type: :controller do
     context "with valid params" do
       let(:new_attributes) {
         expect {
-          post :create, params: {cliente: valid_attributes}, session: valid_session
-        }.to change(Cliente, :count).by(1)
+          put :update, params: {cliente: valid_attributes}, session: valid_session
+        }.to change(Cliente, :count).by(0)
         # skip("Add a hash of attributes valid for your model")
       }
 
@@ -47,7 +47,8 @@ RSpec.describe ClientesController, type: :controller do
         cliente = Cliente.create! valid_attributes
         put :update, params: {id: cliente.to_param, cliente: new_attributes}, session: valid_session
         cliente.reload
-        skip("Add assertions for updated state")
+        expect(controller.notice).to eq('Client was successfully updated.')
+        # skip("Add assertions for updated state")
       end
 
       it "renders a JSON response with the cliente" do

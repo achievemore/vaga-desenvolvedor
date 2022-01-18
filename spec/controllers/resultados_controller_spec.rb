@@ -42,7 +42,11 @@ RSpec.describe ResultadosController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        expect {
+          post :create, params: {resultado: valid_attributes}, session: valid_session
+        }.to change(Resultado, :count).by(0)
+
+        # skip("Add a hash of attributes valid for your model")
       }
 
       it "updates the requested resultado" do
@@ -73,7 +77,7 @@ RSpec.describe ResultadosController, type: :controller do
 
   describe "Teste final!" do
     it "qual a resposta para a vida o universo e tudo mais?" do
-      resposta = Base64.encode64("ESCREVA AQUI A RESPOSTA")
+      resposta = Base64.encode64("42")
       expect("NDI=\n").to eq(resposta)
     end
   end
