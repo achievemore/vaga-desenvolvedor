@@ -37,7 +37,8 @@ RSpec.describe Validadores, type: :lib do
 
     context "diversos" do
       it "validador e-mail" do
-        skip("escreva testes para esses casos")
+        (email =~ /^(([A-Za-z0-9]*\.+*_+)|([A-Za-z0-9]+\-+)|([A-Za-z0-9]+\+)|([A-Za-z0-9]+\+))*[A-Z‌​a-z0-9]+@{1}((\w+\-+)|(\w+\.))*\w{1,63}\.[a-zA-Z]{2,4}$/i)
+        # skip("escreva testes para esses casos")
       end
     end
   end
