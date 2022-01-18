@@ -40,7 +40,7 @@ group :development, :test do
 end
 
 group :test do
-  gem 'rspec-rails', '~> 3.5'
+  gem 'rspec-rails', '~> 5.0.2'
 
   # Use Factory Girl for generating random test data
   gem 'factory_bot'
