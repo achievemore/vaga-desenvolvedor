@@ -11,11 +11,13 @@ RSpec.describe Validadores, type: :lib do
       end
 
       it "validador data (YYYY-MM)" do
-        skip("escreva testes para esses casos")
+        data = Validadores.data('2019-12')
+        # skip("escreva testes para esses casos")
       end
 
       it "validador para data (DD/MM/YYYY)" do
-        skip("escreva testes para esses casos")
+        data = Validadores.data('31-12-2019')
+        # skip("escreva testes para esses casos")
       end
     end
 
