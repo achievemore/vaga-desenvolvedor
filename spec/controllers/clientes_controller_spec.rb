@@ -37,7 +37,10 @@ RSpec.describe ClientesController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        expect {
+          post :create, params: {cliente: valid_attributes}, session: valid_session
+        }.to change(Cliente, :count).by(1)
+        # skip("Add a hash of attributes valid for your model")
       }
 
       it "updates the requested cliente" do
