@@ -37,7 +37,7 @@ RSpec.describe ClientesController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        { cliente_id: cliente.id, periodo: Date.today, valor_meta: 15, valor_realizado: 17 }
       }
 
       it "updates the requested cliente" do
