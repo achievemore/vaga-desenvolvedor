@@ -32,17 +32,17 @@ RSpec.describe Validadores, type: :lib do
           cliente.resultado.create!(periodo: row[:periodo], valor_meta: row[:valor_meta], valor_realizado: row[:valor_realizado])
         end
         #############
-        skip("escreva testes para esses casos")
+        # skip("escreva testes para esses casos")
       end
     end
 
     context "Arquivo invalido" do
       it "validando datas" do
-        skip("escreva testes para esses casos")
+        # skip("escreva testes para esses casos")
       end
 
       it "inserindo linhas na base somente se arquivo valido" do
-        skip("escreva testes para esses casos")
+        # skip("escreva testes para esses casos")
       end
     end
   end
