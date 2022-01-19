@@ -11,15 +11,10 @@ class Resultados
     return 0 if valor_meta.zero?
     valor_realizado / valor_meta
   end
-  def zero?
-    return nil
-  end
 
   def calcula_realizado
     return 0 if valor_realizado.zero?
     valor_meta * valor_peformance
   end
-  def valor_performace
-    valor_performance = valor_realizado / valor_meta
-  end
+
 end
