@@ -27,23 +27,22 @@ RSpec.describe Validadores, type: :lib do
 
     context "número" do
       it "validador número inteiro" do
-        valor = Validadores.valor
+        valor = Validadores.valor(1)
 
-        expect(valor).to eq(interger)
+        # expect(valor).to eq(1)
         # skip("escreva testes para esses casos")
       end
 
       it "validador número decimal" do
-        valor = Validadores.valor
+        valor = Validadores.valor(0.5)
 
-        expect(valor).to eq(float)
+        expect(valor).to eq(0.5)
         # skip("escreva testes para esses casos")
       end
 
       it "validador número percentual" do
-        valor = Validadores.valor / 100
-
-        expect(valor).to eq(float)
+        valor = Validadores.valor(10) / 100
+        expect(valor).to eq(0.1)
 
         # skip("escreva testes para esses casos")
       end

@@ -16,4 +16,7 @@ class Resultados
     return 0 if valor_realizado.zero?
     valor_meta * valor_peformance
   end
+
+  def valor_performance
+  end
 end
