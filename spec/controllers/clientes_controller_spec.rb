@@ -37,9 +37,7 @@ RSpec.describe ClientesController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        expect {
-          put :update, params: {cliente: valid_attributes}, session: valid_session
-        }.to change(Cliente, :count).by(0)
+        { name: "Achivemore" }
         # skip("Add a hash of attributes valid for your model")
       }
 
@@ -47,7 +45,9 @@ RSpec.describe ClientesController, type: :controller do
         cliente = Cliente.create! valid_attributes
         put :update, params: {id: cliente.to_param, cliente: new_attributes}, session: valid_session
         cliente.reload
-        expect(controller.notice).to eq('Client was successfully updated.')
+        new_attributes.each_pair do |key, value|
+          expect(cliente[key]).to eq(value)
+          end
         # skip("Add assertions for updated state")
       end
 

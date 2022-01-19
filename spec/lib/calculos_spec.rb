@@ -10,13 +10,13 @@ RSpec.describe Calculos, type: :lib do
     end
 
     it "com valor realizado valido e meta zero" do
-      valor_performance = Calculos.performance(100.5, 150.5)
+      valor_performance = Calculos.performance(150.5, 0)
 
-      expect(valor_performance).to eq(0)
+      expect(valor_performance).to eq(valor_realizado)
     end
 
     it "com valor realizado valido e meta null" do
-      valor_performance = Calculos.performance(0.0, 150.5)
+      valor_performance = Calculos.performance(150.5, null)
 
       expect(valor_performance).to eq(null)
       # skip("escreva testes para esses casos")
