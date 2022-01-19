@@ -25,19 +25,19 @@ RSpec.describe Validadores, type: :lib do
 
     context "número" do
       it "validador número inteiro" do
-        numero = Validadores.valor('35')
+        valor = Validadores.valor('35')
 
         expect(valor).to eq(true)
       end
 
       it "validador número decimal" do
-        numero = Validadores.valor('0.2')
+        valor = Validadores.valor('0.2')
 
         expect(valor).to eq(true)
       end
 
       it "validador número percentual" do
-        numero = Validadores.valor('20%')
+        valor = Validadores.valor('20%')
 
         expect(valor).to eq(true)
       end
@@ -45,7 +45,9 @@ RSpec.describe Validadores, type: :lib do
 
     context "diversos" do
       it "validador e-mail" do
-        skip("escreva testes para esses casos")
+        email = Validadores.email('teste@teste.com')
+
+        expect(email).to eq(true)
       end
     end
   end
