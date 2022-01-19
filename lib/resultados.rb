@@ -7,6 +7,8 @@ class Resultados
     # @valor_performance = valor_performance
   end
 
+
+
   def calcula_performance
     return 0 if valor_meta.zero?
     valor_realizado / valor_meta

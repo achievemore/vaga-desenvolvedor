@@ -42,7 +42,7 @@ RSpec.describe Resultados, type: :lib do
       resultado.valor_performance = 0
       resultado.valor_meta = 0
 
-      expect(resultado.calcula_realizado).to eq(1)
+      expect(resultado.calcula_realizado).to eq(0)
     end
 
     # @TODO CRIE MAIS TESTES
