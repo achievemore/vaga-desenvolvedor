@@ -1,15 +1,14 @@
 class Calculos
 
   def self.performance(valor_meta, valor_realizado)
-
-  if valor_meta == 0
+    if valor_meta == 0
       return 0
-  else
-    valor_realizado.to_f / valor_meta.to_f
-    end
+    elsif valor_meta.nil? then
+      return nil
+    elsif valor_realizado == 0
+      return nil
+    else
+      valor_meta.to_f / valor_realizado.to_f #RETORNA 0,66777
+      end
   end
 end
-
-
-# valor_realizado=150,5
-# valor_meta=100,50
