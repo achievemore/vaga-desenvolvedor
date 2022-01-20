@@ -5,6 +5,8 @@ class Validadores
       format_str = '%Y%m'
     when /(^(19|20)\d{2})[\-]((0?[1-9]|1[012]){1}$)/ # YYYY-mm
       format_str = '%Y-%m'
+    when /^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/ # dd/mm/YYYY
+      format_str = '%d/%m/%Y'
     end
 
     Date.strptime(periodo, format_str)

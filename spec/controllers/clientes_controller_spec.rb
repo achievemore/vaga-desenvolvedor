@@ -47,7 +47,7 @@ RSpec.describe ClientesController, type: :controller do
         cliente.reload
         new_attributes.each_pair do |key, value|
           expect(cliente[key]).to eq(value)
-          end
+        end
         # skip("Add assertions for updated state")
       end
 

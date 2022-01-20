@@ -24,7 +24,7 @@ RSpec.describe Resultados, type: :lib do
       resultado.valor_meta = nil
       resultado.valor_realizado = 20
 
-      expect(resultado.calcula_performance).to eq(0)
+      expect(resultado.calcula_performance).to eq(nil)
     end
 
     it "com valor meta valido e realizado zero" do

@@ -24,7 +24,7 @@ RSpec.describe Validadores, type: :lib do
       end
 
       it "salva arquivo na base e calcula performance total" do
-        ########################
+
         @file = File.open(arquivo_valido[:file])
 
         CSV.foreach(@file, {headers: true, header_converters: :symbol, col_sep: ';'}) do |row|
@@ -42,7 +42,7 @@ RSpec.describe Validadores, type: :lib do
       end
 
       it "inserindo linhas na base somente se arquivo valido" do
-        # skip("escreva testes para esses casos")
+      # skip("escreva testes para esses casos")
       end
     end
   end

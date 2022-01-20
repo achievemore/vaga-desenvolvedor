@@ -5,50 +5,39 @@ RSpec.describe Validadores, type: :lib do
   describe "Validadores" do
     context "data" do
       it "validador data (YYYY-MM-DD)" do
-        data = Validadores.data('2019-31-12')
-
-        if data == '2019-31-12'
-          return true
-        end
-        # expect(data).to eq(true)
+        data = Validadores.data('2019-12-31')
+        expect(data).to eq(true)
       end
 
       it "validador data (YYYY-MM)" do
         data = Validadores.data('2019-12')
-
-        if data == '2019-12'
-          return true
-        end
-        # expect(data).to eq(true)
+        expect(data).to eq(true)
         # skip("escreva testes para esses casos")
       end
 
       it "validador para data (DD/MM/YYYY)" do
         data = Validadores.data('31/12/2019')
-        if data == '04/12/2019'
-          return true
-        end
-        # expect(data).to eq(true)
+         expect(data).to eq(true)
         # skip("escreva testes para esses casos")
       end
     end
 
     context "número" do
       it "validador número inteiro" do
-        # valor = Validadores.valor(1)
-        # expect(valor).to eq(1)
+        valor = Validadores.valor(10)
+        expect(valor).to eq(true)
         # skip("escreva testes para esses casos")
       end
 
       it "validador número decimal" do
-        # valor = Validadores.valor(10)/ 100
-        # expect(valor).to eq(0.1)
+        valor = Validadores.valor(0.2)
+        expect(valor).to eq(true)
         # skip("escreva testes para esses casos")
       end
 
       it "validador número percentual" do
-        # valor = Validadores.valor(10) / 100
-        # expect(valor).to eq(0.1)
+        valor = Validadores.valor(10)
+        expect(valor).to eq(true)
 
         # skip("escreva testes para esses casos")
       end
@@ -56,6 +45,8 @@ RSpec.describe Validadores, type: :lib do
 
     context "diversos" do
       it "validador e-mail" do
+        email = Validadores.email("test@test.com")
+        expect(email).to eq(true)
         # skip("escreva testes para esses casos")
       end
     end
