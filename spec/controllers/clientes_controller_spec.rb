@@ -43,7 +43,7 @@ RSpec.describe ClientesController, type: :controller do
 
       it "updates the requested cliente" do
         cliente = Cliente.create! valid_attributes
-        put :update, params: {id: cliente.to_param, cliente: new_attributes}, session: valid_session
+        put :update, params: { id: cliente.to_param, cliente: new_attributes}, session: valid_session
         cliente.reload
         new_attributes.each_pair do |key, value|
           expect(cliente[key]).to eq(value)
@@ -54,7 +54,7 @@ RSpec.describe ClientesController, type: :controller do
       it "renders a JSON response with the cliente" do
         cliente = Cliente.create! valid_attributes
 
-        put :update, params: {id: cliente.to_param, cliente: valid_attributes}, session: valid_session
+        put :update, params: { id: cliente.to_param, cliente: valid_attributes}, session: valid_session
         expect(response).to have_http_status(:ok)
         expect(response.content_type).to eq('application/json')
       end
@@ -65,9 +65,8 @@ RSpec.describe ClientesController, type: :controller do
     it "destroys the requested cliente" do
       cliente = Cliente.create! valid_attributes
       expect {
-        delete :destroy, params: {id: cliente.to_param}, session: valid_session
+        delete :destroy, params: { id: cliente.to_param}, session: valid_session
       }.to change(Cliente, :count).by(-1)
     end
   end
-
 end
