@@ -38,11 +38,27 @@ RSpec.describe Validadores, type: :lib do
 
     context "Arquivo invalido" do
       it "validando datas" do
+        @file = File.open(arquivo_valido[:file])
+
+        CSV.foreach(@file, {headers: true, header_converters: :symbol, col_sep: ';'}) do |row|
+          break unless Validadores.data(row[:periodo])
+          cliente = Cliente.create!(nome: row[:cliente])
+          cliente.resultado.create!(periodo: row[:periodo], valor_meta: row[:valor_meta], valor_realizado: row[:valor_realizado])
+        end
+
+        expect(Cliente.all.size).to eq(3)
         # skip("escreva testes para esses casos")
       end
 
       it "inserindo linhas na base somente se arquivo valido" do
       # skip("escreva testes para esses casos")
+
+        @file = File.open(arquivo_valido[:file])
+
+        CSV.foreach(@file, {headers: true, header_converters: :symbol, col_sep: ';'}) do |row|
+          cliente = Cliente.create!(nome: row[:cliente])
+          cliente.resultado.create!(periodo: row[:periodo], valor_meta: row[:valor_meta], valor_realizado: row[:valor_realizado])
+        end
       end
     end
   end
