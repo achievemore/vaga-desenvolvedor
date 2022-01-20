@@ -52,6 +52,9 @@ RSpec.describe ResultadosController, type: :controller do
         resultado.reload
 
         expect(resultado.attributes).to eq(new_attributes)
+        #  new_attributes.each_pair do |key, value|
+          # expect(resultado[key]).to eq(resultado[value])
+        # end
       end
 
       it "renders a JSON response with the resultado" do
