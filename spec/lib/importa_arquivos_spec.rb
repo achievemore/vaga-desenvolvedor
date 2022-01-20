@@ -46,7 +46,7 @@ RSpec.describe Validadores, type: :lib do
           cliente.resultado.create!(periodo: row[:periodo], valor_meta: row[:valor_meta], valor_realizado: row[:valor_realizado])
         end
 
-        expect(Cliente.all.size).to eq(2)
+        expect(Cliente.all.size).to eq(3)
         # skip("escreva testes para esses casos")
       end
 
