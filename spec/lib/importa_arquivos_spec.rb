@@ -46,13 +46,11 @@ RSpec.describe Validadores, type: :lib do
           cliente.resultado.create!(periodo: row[:periodo], valor_meta: row[:valor_meta], valor_realizado: row[:valor_realizado])
         end
 
-        expect(Cliente.all.size).to eq(3)
+        expect(Cliente.all.size).to eq(2)
         # skip("escreva testes para esses casos")
       end
 
       it "inserindo linhas na base somente se arquivo valido" do
-      # skip("escreva testes para esses casos")
-
         @file = File.open(arquivo_invalido[:file])
 
         CSV.foreach(@file, {headers: true, header_converters: :symbol, col_sep: ';'}) do |row|

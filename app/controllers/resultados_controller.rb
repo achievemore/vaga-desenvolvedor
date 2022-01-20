@@ -5,15 +5,13 @@ class ResultadosController < ApplicationController
     @resultados = Resultado.all
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @resultado = Resultado.new
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
     @resultado = Resultado.new(resultado_params)
@@ -40,12 +38,12 @@ class ResultadosController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_resultado
-      @resultado = Resultado.find(params[:id])
-    end
-
+  def set_resultado
+    @resultado = Resultado.find(params[:id])
+  end
     # Never trust parameters from the scary internet, only allow the white list through.
-    def resultado_params
-      params.require(:resultado).permit(:periodo, :valor_meta, :valor_realizado)
-    end
+
+  def resultado_params
+    params.require(:resultado).permit(:periodo, :valor_meta, :valor_realizado)
+  end
 end
