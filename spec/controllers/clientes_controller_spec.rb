@@ -53,7 +53,7 @@ RSpec.describe ClientesController, type: :controller do
 
         put :update, params: {id: cliente.to_param, cliente: valid_attributes}, session: valid_session
         expect(response).to have_http_status(:ok)
-        expect(response.content_type).to eq('application/json')
+        expect(response.content_type).to eq('application/json; charset=utf-8')
       end
     end
   end
