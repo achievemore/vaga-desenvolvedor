@@ -37,14 +37,15 @@ RSpec.describe ClientesController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        { cliente_id: cliente.id, periodo: Date.today, valor_meta: 15, valor_realizado: 17 }
+        {nome: 'Caroline'}
       }
 
       it "updates the requested cliente" do
         cliente = Cliente.create! valid_attributes
         put :update, params: {id: cliente.to_param, cliente: new_attributes}, session: valid_session
         cliente.reload
-        skip("Add assertions for updated state")
+
+        expect(cliente.nome).to eq('Caroline')
       end
 
       it "renders a JSON response with the cliente" do
