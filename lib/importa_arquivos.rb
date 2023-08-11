@@ -14,7 +14,7 @@ class ImportaArquivos
       cliente = Cliente.create!(nome: row[:cliente])
       valor_meta = row[:valor_meta].to_f
       valor_realizado = row[:valor_realizado].to_f
-      cliente.resultado.create!(periodo: Validadores.match_periodo(row[:periodo]), valor_meta: valor_meta, valor_realizado: valor_realizado, valor_performance: calculate_perfomance(valor_meta, valor_realizado))
+      cliente.resultados.create!(periodo: Validadores.match_periodo(row[:periodo]), valor_meta: valor_meta, valor_realizado: valor_realizado, valor_performance: calculate_perfomance(valor_meta, valor_realizado))
     end
   end
 
