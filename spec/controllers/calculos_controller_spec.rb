@@ -23,9 +23,9 @@ RSpec.describe CalculosController, type: :controller do
     end
 
     it "com atributos inválidos" do
-      resultado = Resultado.create! valid_attributes
+      resultado = Resultado.create! invalid_valid_attributes
       get :performance, params: {valor_meta: resultado.valor_meta, valor_realizado: resultado.valor_realizado}, session: valid_session
-      expect(response).to be_successful
+      expect(JSON.parse(response.body)['valor_performance']).to eq(0)
     end
   end
 end
