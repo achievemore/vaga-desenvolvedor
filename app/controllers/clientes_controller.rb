@@ -17,20 +17,14 @@ class ClientesController < ApplicationController
 
   def create
     @cliente = Cliente.new(cliente_params)
+    return render json: { status: :created, location: @cliente } if @cliente.save
 
-    if @cliente.save
-      render json: { status: :created, location: @cliente }
-    else
-      render json: { errors: @cliente.errors, status: :unprocessable_entity }
-    end
+    render json: { errors: @cliente.errors, status: :unprocessable_entity }
   end
 
   def update
-    if @cliente.update(cliente_params)
-      render json: { status: :ok, location: @cliente }
-    else
-      render json: { errors: @cliente.errors, status: :unprocessable_entity }
-    end
+    return render json: { status: :ok, location: @cliente } if @cliente.update(cliente_params)
+    render json: { errors: @cliente.errors, status: :unprocessable_entity }
   end
 
   def destroy
