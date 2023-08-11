@@ -17,7 +17,7 @@ jobs:
         ci_node_index: [0, 1]
     env:
       RAILS_ENV: test
-      GEMFILE_RUBY_VERSION: 2.6.9
+      GEMFILE_RUBY_VERSION: 3.0.0
 
     steps:
       - uses: actions/checkout@v2
