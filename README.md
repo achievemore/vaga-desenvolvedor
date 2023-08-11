@@ -23,8 +23,8 @@ Pedimos que trabalhe sozinho e não divulgue o resultado na internet.
 #### Requerimentos:
 
 * Github
-* Ruby >= 2.5
-* Rails
+* Ruby 3.1.2
+* Rails 7.0.1
 * Terminal (Command prompt)
 
 #### Conhecimentos necessários:
