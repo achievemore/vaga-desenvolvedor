@@ -1,4 +1,4 @@
-FROM ruby:2.6-alpine
+FROM ruby:3.1-alpine
 
 LABEL Name=achievemore-ruby Version=2.6
 
@@ -15,6 +15,7 @@ RUN apk --update add less
 
 COPY Gemfile /app/Gemfile
 COPY Gemfile.lock /app/Gemfile.lock
+RUN apk update && apk add shared-mime-info
 RUN bundle install
 COPY . /app
 
