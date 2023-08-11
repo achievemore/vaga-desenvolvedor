@@ -1,4 +1,4 @@
 class ResultadoSerializer < ActiveModel::Serializer
   belongs_to :cliente
-  attributes :id, :valor_meta, :valor_realizado
+  attributes :id, :valor_meta, :valor_realizado, :valor_performance
 end
