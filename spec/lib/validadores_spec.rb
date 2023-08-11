@@ -21,21 +21,42 @@ RSpec.describe Validadores, type: :lib do
 
     context "número" do
       it "validador número inteiro" do
-        skip("escreva testes para esses casos")
+        data = Validadores.valor('10')
+
+        expect(data).to eq(true)
       end
 
       it "validador número decimal" do
-        skip("escreva testes para esses casos")
+        data = Validadores.valor('10,0')
+
+        expect(data).to eq(true)
       end
 
       it "validador número percentual" do
-        skip("escreva testes para esses casos")
+        data = Validadores.valor('10%')
+
+        expect(data).to eq(true)
+      end
+
+      it 'numero invalido' do
+        data = Validadores.valor('abc')
+
+        expect(data).to eq(false)
       end
     end
 
     context "diversos" do
-      it "validador e-mail" do
-        skip("escreva testes para esses casos")
+      context  "validador e-mail" do
+        it 'valid' do
+          data = Validadores.email('teste@achievemore.com.br')
+
+          expect(data).to eq(true)
+        end
+        it 'invalid' do
+          data = Validadores.email('achievemore.com.br')
+
+          expect(data).to eq(false)
+        end
       end
     end
   end
