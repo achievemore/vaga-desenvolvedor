@@ -13,35 +13,45 @@ RSpec.describe Validadores, type: :lib do
     context "Arquivo valido" do
       it "validando datas" do
         @file = File.open(arquivo_valido[:file])
-
-        CSV.foreach(@file, {headers: true, header_converters: :symbol, col_sep: ';'}) do |row|
+        CSV.foreach(@file, headers: true, header_converters: :symbol, col_sep: ';') do |row|
           break unless Validadores.data(row[:periodo])
           cliente = Cliente.create!(nome: row[:cliente])
           cliente.resultado.create!(periodo: row[:periodo], valor_meta: row[:valor_meta], valor_realizado: row[:valor_realizado])
         end
 
         expect(Cliente.all.size).to eq(3)
+        expect(Cliente.first.nome).to eq('Cliente 1')
+        expect(Cliente.second.nome).to eq('Cliente 2')
+        expect(Cliente.third.nome).to eq('Cliente 3')
       end
 
       it "salva arquivo na base e calcula performance total" do
-        # @file = File.open(arquivo_valido[:file])
-
-        # CSV.foreach(@file, {headers: true, header_converters: :symbol, col_sep: ';'}) do |row|
-        #   cliente = Cliente.create!(nome: row[:cliente])
-        #   cliente.resultado.create!(periodo: row[:periodo], valor_meta: row[:valor_meta], valor_realizado: row[:valor_realizado])
-        # end
-
-        skip("escreva testes para esses casos")
+        @file = File.open(arquivo_valido[:file])
+        expect {
+          CSV.foreach(@file, headers: true, header_converters: :symbol, col_sep: ';') do |row|
+            cliente = Cliente.create!(nome: row[:cliente])
+            cliente.resultado.create!(periodo: row[:periodo], valor_meta: row[:valor_meta], valor_realizado: row[:valor_realizado])
+          end
+        }.to perform_under(15).ms
       end
     end
 
     context "Arquivo invalido" do
       it "validando datas" do
-        skip("escreva testes para esses casos")
-      end
+        begin
+          @file = File.open(arquivo_invalido[:file])
+          ActiveRecord::Base.transaction do
+            CSV.foreach(@file, headers: true, header_converters: :symbol, col_sep: ';') do |row|
+              raise StandardError unless Validadores.data(row[:periodo])
+              cliente = Cliente.create!(nome: row[:cliente])
+              cliente.resultado.create!(periodo: row[:periodo], valor_meta: row[:valor_meta], valor_realizado: row[:valor_realizado])
+            end
+          end
+        rescue StandardError
+          nil
+        end
 
-      it "inserindo linhas na base somente se arquivo valido" do
-        skip("escreva testes para esses casos")
+        expect(Cliente.all.size).to eq(0)
       end
     end
   end

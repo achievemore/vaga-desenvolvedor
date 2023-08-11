@@ -41,6 +41,7 @@ end
 
 group :test do
   gem 'rspec-rails'
+  gem 'rspec-benchmark'
 
   # Use Factory Girl for generating random test data
   gem 'factory_bot'
