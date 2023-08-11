@@ -17,6 +17,7 @@ class Resultados
 
   def calcula_realizado
     return nil if valor_performance.nil? || valor_meta.nil?
+
     @valor_realizado = valor_meta * valor_performance
   end
 end

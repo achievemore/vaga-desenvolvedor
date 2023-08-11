@@ -5,15 +5,13 @@ class ClientesController < ApplicationController
     @clientes = Cliente.all
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @cliente = Cliente.new
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
     @cliente = Cliente.new(cliente_params)
@@ -24,6 +22,7 @@ class ClientesController < ApplicationController
 
   def update
     return render json: { status: :ok, location: @cliente } if @cliente.update(cliente_params)
+
     render json: { errors: @cliente.errors, status: :unprocessable_entity }
   end
 

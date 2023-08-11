@@ -5,15 +5,13 @@ class ResultadosController < ApplicationController
     @resultados = Resultado.all
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @resultado = Resultado.new
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
     @resultado = Resultado.new(resultado_params)
