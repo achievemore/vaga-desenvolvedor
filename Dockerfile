@@ -1,4 +1,4 @@
-FROM ruby:2.6-alpine
+FROM --platform=linux/x86_64 ruby:2.6-alpine
 
 LABEL Name=achievemore-ruby Version=2.6
 
@@ -9,7 +9,8 @@ RUN gem update bundler
 RUN apk --update --upgrade --no-cache add \
     build-base \
     sqlite-dev \
-    tzdata
+    tzdata \
+    shared-mime-info
 
 RUN apk --update add less
 

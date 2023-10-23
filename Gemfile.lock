@@ -48,8 +48,8 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
     arel (9.0.0)
-    bootsnap (1.4.5)
-      msgpack (~> 1.0)
+    bootsnap (1.16.0)
+      msgpack (~> 1.2)
     builder (3.2.4)
     byebug (11.0.1)
     case_transform (0.2)
@@ -61,7 +61,7 @@ GEM
     erubi (1.10.0)
     factory_bot (5.0.2)
       activesupport (>= 4.2.0)
-    ffi (1.11.1)
+    ffi (1.16.3)
     globalid (1.0.0)
       activesupport (>= 5.0)
     i18n (1.8.11)
@@ -83,16 +83,16 @@ GEM
       nokogiri (~> 1)
       rake
     mini_mime (1.1.2)
-    mini_portile2 (2.8.1)
+    mini_portile2 (2.8.5)
     minitest (5.15.0)
-    msgpack (1.3.1)
+    msgpack (1.7.2)
     nio4r (2.5.8)
     nokogiri (1.13.10)
       mini_portile2 (~> 2.8.0)
       racc (~> 1.4)
     puma (4.3.10)
       nio4r (~> 2.0)
-    racc (1.6.2)
+    racc (1.7.1)
     rack (2.2.6.2)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
@@ -184,4 +184,4 @@ RUBY VERSION
    ruby 2.6.9p207
 
 BUNDLED WITH
-   2.3.5
+   2.4.21
