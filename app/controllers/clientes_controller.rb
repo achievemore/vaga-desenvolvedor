@@ -17,7 +17,6 @@ class ClientesController < ApplicationController
 
   def create
     @cliente = Cliente.new(cliente_params)
-
     if @cliente.save
       render json: { status: :created, location: @cliente }
     else
@@ -39,13 +38,11 @@ class ClientesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_cliente
       @cliente = Cliente.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def cliente_params
-      params.require(:cliente).permit(:nome)
+      params.require(:cliente).permit(:nome, :arquivo)
     end
 end
