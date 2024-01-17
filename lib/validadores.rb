@@ -11,14 +11,56 @@ class Validadores
   end
 
   def self.data(data)
-    /^((([1-2][0-9]{3})[\-](0[13578]|10|12)[\-](0[1-9]|1[0-9]|2[0-9]|30|31))|(([1-2][0-9]{3})[\-](0?[469]|11)[\-](0?[1-9]|1[0-9]|2[0-9]|30))|(([1-2][0-9](0[048]|1[26]|2[048]|3[26]|4[048]|5[26]|6[048]|7[26]|8[048]|9[26]))[\-](0?[2])[\-](0?[1-9]|1[0-9]|2[0-9]))|(([1-2][0-9]{3})[\-](0?[2])[\-](0?[1-9]|1[0-9]|2[0-8])))$/.match?(data)
+    regex_yyyy_mm_dd = /\A\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])\z/
+    regex_dd_mm_yyyy = /\A(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}\z/
+    regex_yyyy_mm = /\A\d{4}-(0[1-9]|1[0-2])\z/
+
+    if data.match?(regex_yyyy_mm_dd)
+      partes = data.split('-')
+      ano = partes[0].to_i
+      mes = partes[1].to_i
+      dia = partes[2].to_i
+
+      valida_dia(ano,mes,dia)
+    elsif data.match?(regex_yyyy_mm)
+      return true
+    elsif data.match?(regex_dd_mm_yyyy)
+      partes = data.split('/')
+      ano = partes[2].to_i
+      mes = partes[1].to_i
+      dia = partes[0].to_i
+
+      valida_dia(ano,mes,dia)
+    else
+      return false
+    end
   end
 
   def self.valor(valor)
-    /([+-]?((\d+|\d{1,3}(\.\d{3})+)(\,\d*)?|\,\d+))/.match?(valor)
+    regex_inteiro = /^-?\d+$/
+    regex_decimal = /^-?\d+(\.\d+)?$/
+    regex_percentual = /^-?\d+(\.\d+)?%$/
+
+    return valor.match?(regex_inteiro) || valor.match?(regex_decimal) || valor.match?(regex_percentual)
   end
 
   def self.email(email)
-    /([A-Za-z0-9]*((_*[\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,}))/.match?(email)
+    regex_email = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
+    return email.match?(regex_email)
   end
+
+  private
+    def self.valida_dia(ano,mes,dia)
+      if (mes == 4 || mes == 6 || mes == 9 || mes == 11) && dia > 30
+        false
+      elsif mes == 2
+        if (ano % 4 == 0 && ano % 100 != 0) || (ano % 400 == 0)
+          return dia <= 29
+        else
+          return dia <= 28
+        end
+      else
+        true
+      end
+    end
 end
