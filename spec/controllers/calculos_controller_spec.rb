@@ -32,7 +32,7 @@ RSpec.describe CalculosController, type: :controller do
       json_response = JSON.parse(response.body)
 
       expect(response).to be_successful
-      expect(json_response['valor_performance']).to eq(nil)
+      expect(json_response['valor_performance']).to eq(0)
     end
   end
 end
