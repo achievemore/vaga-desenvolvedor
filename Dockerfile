@@ -16,6 +16,7 @@ RUN apk --update add less
 
 COPY Gemfile /app/Gemfile
 COPY Gemfile.lock /app/Gemfile.lock
+RUN gem install bundler:2.4.21
 RUN bundle install
 COPY . /app
 
