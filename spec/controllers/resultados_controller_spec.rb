@@ -17,7 +17,10 @@ RSpec.describe ResultadosController, type: :controller do
     it "returns a success response" do
       resultado = Resultado.create! valid_attributes
       get :index, params: {}, session: valid_session
+      json_response = JSON.parse(response.body)
+
       expect(response).to be_successful
+      expect(json_response['resultados']).to include(JSON.parse(resultado.to_json))
     end
   end
 
@@ -25,7 +28,18 @@ RSpec.describe ResultadosController, type: :controller do
     it "returns a success response" do
       resultado = Resultado.create! valid_attributes
       get :show, params: {id: resultado.to_param}, session: valid_session
+      json_response = JSON.parse(response.body)
+
       expect(response).to be_successful
+      expect(json_response['resultado']).to include(JSON.parse(resultado.to_json))
+    end
+
+    it "returns not a success response" do
+      get :show, params: {id: 99}, session: valid_session
+      json_response = JSON.parse(response.body)
+
+      expect(response).not_to be_successful
+      expect(response).to have_http_status(:not_found)
     end
   end
 
