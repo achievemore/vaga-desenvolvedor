@@ -20,13 +20,19 @@ RSpec.describe CalculosController, type: :controller do
       resultado = Resultado.create! valid_attributes
       puts resultado
       get :performance, params: {valor_meta: resultado.valor_meta, valor_realizado: resultado.valor_realizado}, session: valid_session
+      json_response = JSON.parse(response.body)
+
       expect(response).to be_successful
+      expect(json_response['valor_performance']).to eq('1.20952380952380952380952381')
     end
 
     it "com atributos inválidos" do
       resultado = Resultado.create! invalid_attributes
       get :performance, params: {valor_meta: resultado.valor_meta, valor_realizado: resultado.valor_realizado}, session: valid_session
+      json_response = JSON.parse(response.body)
+
       expect(response).to be_successful
+      expect(json_response['valor_performance']).to eq(nil)
     end
   end
 end
