@@ -23,7 +23,7 @@ RSpec.describe CalculosController, type: :controller do
       json_response = JSON.parse(response.body)
 
       expect(response).to be_successful
-      expect(json_response['valor_performance']).to eq('1.20952380952380952380952381')
+      expect(json_response['valor_performance']).to eq('1.21')
     end
 
     it "com atributos inválidos" do
