@@ -11,9 +11,17 @@ RSpec.describe ResultadosController, type: :controller do
 
   let(:resultado) { Resultado.create! valid_attributes }
 
-  let(:valid_session) { {} }
+  describe "not authorized" do
+    it "returns a not found response" do
+      get :index
+
+      expect(response).to have_http_status(:unauthorized)
+    end
+  end
 
   describe "GET #index" do
+    include_context 'with authentication'
+
     it "returns a success response" do
       get :index, params: {}
 
@@ -22,6 +30,8 @@ RSpec.describe ResultadosController, type: :controller do
   end
 
   describe "GET #show" do
+    include_context 'with authentication'
+
     it "returns a success response" do
       get :show, params: {id: resultado.id}
 
@@ -29,30 +39,34 @@ RSpec.describe ResultadosController, type: :controller do
     end
 
     it "returns a not found response" do
-      get :show, params: {id: 12481632}, session: valid_session
+      get :show, params: {id: 12481632}
 
       expect(response).to have_http_status(:not_found)
     end
   end
 
   describe "POST #create" do
+    include_context 'with authentication'
+
     context "with valid params" do
       it "creates a new Resultado" do
         expect {
-          post :create, params: {resultado: valid_attributes}, session: valid_session
+          post :create, params: {resultado: valid_attributes}
         }.to change(Resultado, :count).by(1)
       end
     end
   end
 
   describe "PUT #update" do
+    include_context 'with authentication'
+
     context "with valid params" do
       let(:new_attributes) {
         { valor_meta: 10.5, valor_realizado: 12.7 }
       }
 
       it "updates the requested resultado", :aggregate_failures do
-        put :update, params: {id: resultado.to_param, resultado: new_attributes}, session: valid_session
+        put :update, params: {id: resultado.to_param, resultado: new_attributes}
 
         resultado.reload
 
@@ -70,6 +84,8 @@ RSpec.describe ResultadosController, type: :controller do
   end
 
   describe "DELETE #destroy" do
+    include_context 'with authentication'
+
     it "destroys the requested resultado" do
       resultado = Resultado.create! valid_attributes
 
