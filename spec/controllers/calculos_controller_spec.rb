@@ -18,7 +18,6 @@ RSpec.describe CalculosController, type: :controller do
   describe "GET #performance" do
     it "com atributos validos" do
       resultado = Resultado.create! valid_attributes
-      puts resultado
       get :performance, params: {valor_meta: resultado.valor_meta, valor_realizado: resultado.valor_realizado}, session: valid_session
       json_response = JSON.parse(response.body)
 
