@@ -2,25 +2,23 @@ require 'rails_helper'
 
 RSpec.describe ClientesController, type: :controller do
 
-  let(:valid_attributes) {
-    { nome: "AchieveMore" }
-  }
-
   let(:valid_session) { {} }
 
   describe "GET #index" do
     it "returns a success response" do
-      cliente = Cliente.create! valid_attributes
+      create_list(:cliente, 2)
+      create(:cliente, nome: "AchieveMore")
 
       get :index, params: {}, session: valid_session
 
       expect(response).to be_successful
+      expect(response.body).to include("AchieveMore")
     end
   end
 
   describe "GET #show" do
     it "returns a success response" do
-      cliente = Cliente.create! valid_attributes
+      cliente = create(:cliente)
 
       get :show, params: {id: cliente.to_param}, session: valid_session
 
@@ -31,8 +29,10 @@ RSpec.describe ClientesController, type: :controller do
   describe "POST #create" do
     context "with valid params" do
       it "creates a new Cliente" do
+        cliente = build(:cliente)
+
         expect {
-          post :create, params: {cliente: valid_attributes}, session: valid_session
+          post :create, params: { cliente: cliente.attributes }, session: valid_session
         }.to change(Cliente, :count).by(1)
       end
     end
@@ -45,7 +45,7 @@ RSpec.describe ClientesController, type: :controller do
       }
 
       it "updates the requested cliente" do
-        cliente = Cliente.create! valid_attributes
+        cliente = create(:cliente)
 
         put :update, params: {id: cliente.to_param, cliente: new_attributes}, session: valid_session
         cliente.reload
@@ -54,9 +54,9 @@ RSpec.describe ClientesController, type: :controller do
       end
 
       it "renders a JSON response with the cliente" do
-        cliente = Cliente.create! valid_attributes
+        cliente = create(:cliente)
 
-        put :update, params: {id: cliente.to_param, cliente: valid_attributes}, session: valid_session
+        put :update, params: {id: cliente.to_param, cliente: cliente.attributes}, session: valid_session
 
         expect(response).to have_http_status(:ok)
         expect(response.content_type).to include('application/json')
@@ -66,7 +66,7 @@ RSpec.describe ClientesController, type: :controller do
 
   describe "DELETE #destroy" do
     it "destroys the requested cliente" do
-      cliente = Cliente.create! valid_attributes
+      cliente = create(:cliente)
 
       expect {
         delete :destroy, params: {id: cliente.to_param}
