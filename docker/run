@@ -1,1 +1,2 @@
+#!/bin/sh
 docker run -p 3000:3000 --rm -w /app -it achievemore-ruby $1
