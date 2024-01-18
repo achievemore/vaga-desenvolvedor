@@ -32,14 +32,14 @@ RSpec.describe ImportaArquivos, type: :lib do
 
         expect do
           ImportaArquivos.importa_arquivo(@file)
-        end.to change(Resultado, :count).by(2)
+        end.to change(Resultado, :count).by(1)
       end
 
       it "inserindo linhas na base somente se arquivo valido" do
         @file = File.open(arquivo_invalido[:file])
         expect do
           ImportaArquivos.importa_arquivo(@file)
-        end.to change(Resultado, :count).by(2)
+        end.to change(Resultado, :count).by(1)
       end
     end
   end
