@@ -21,6 +21,10 @@ RUN gem update --system
 RUN bundle install
 COPY . /app
 
+# Fix sqlite3_native.so: posix_fallocate64: symbol not found - source: https://gist.github.com/hopsoft/9a0bf00be2816cbe036fae5aa3d85b73
+RUN gem uninstall sqlite3 --all
+RUN CFLAGS=-DSQLITE_DEFAULT_PAGE_SIZE=16300 gem install sqlite3 --platform=ruby
+
 EXPOSE 3000
 
 # Start the main process.
