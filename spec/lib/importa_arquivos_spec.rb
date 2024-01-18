@@ -24,24 +24,59 @@ RSpec.describe Validadores, type: :lib do
       end
 
       it "salva arquivo na base e calcula performance total" do
-        # @file = File.open(arquivo_valido[:file])
+        @file = File.open(arquivo_valido[:file])
 
-        # CSV.foreach(@file, {headers: true, header_converters: :symbol, col_sep: ';'}) do |row|
-        #   cliente = Cliente.create!(nome: row[:cliente])
-        #   cliente.resultado.create!(periodo: row[:periodo], valor_meta: row[:valor_meta], valor_realizado: row[:valor_realizado])
-        # end
+        performance = []
+        resultados = Resultados.new
 
-        skip("escreva testes para esses casos")
+        CSV.foreach(@file, {headers: true, header_converters: :symbol, col_sep: ';'}) do |row|
+          break unless Validadores.data(row[:periodo])
+          cliente = Cliente.create!(nome: row[:cliente])
+          resultado = cliente.resultado.create!(periodo: row[:periodo], valor_meta: row[:valor_meta], valor_realizado: row[:valor_realizado])
+
+          resultados.valor_meta = resultado.valor_meta.to_f
+          resultados.valor_realizado = resultado.valor_realizado.to_f
+
+          performance << resultados.calcula_performance
+        end
+
+        expect(performance).to eq([1.2, 0.83, 0.25])
       end
     end
 
     context "Arquivo invalido" do
       it "validando datas" do
-        skip("escreva testes para esses casos")
+        @file = File.open(arquivo_invalido[:file])
+
+        CSV.foreach(@file, {headers: true, header_converters: :symbol, col_sep: ';'}) do |row|
+          break unless Validadores.data(row[:periodo])
+
+          cliente = Cliente.create!(nome: row[:cliente])
+          cliente.resultado.create!(periodo: row[:periodo], valor_meta: row[:valor_meta], valor_realizado: row[:valor_realizado])
+        end
+
+        expect(Cliente.all.size).to eq(2)
       end
 
       it "inserindo linhas na base somente se arquivo valido" do
-        skip("escreva testes para esses casos")
+        @file = File.open(arquivo_invalido[:file])
+
+        performance = []
+        resultados = Resultados.new
+
+        CSV.foreach(@file, {headers: true, header_converters: :symbol, col_sep: ';'}) do |row|
+          break unless Validadores.data(row[:periodo])
+
+          cliente = Cliente.create!(nome: row[:cliente])
+          resultado = cliente.resultado.create!(periodo: row[:periodo], valor_meta: row[:valor_meta], valor_realizado: row[:valor_realizado])
+
+          resultados.valor_meta = resultado.valor_meta.to_f
+          resultados.valor_realizado = resultado.valor_realizado.to_f
+
+          performance << resultados.calcula_performance
+        end
+
+        expect(performance).to eq([0, 0.42])
       end
     end
   end

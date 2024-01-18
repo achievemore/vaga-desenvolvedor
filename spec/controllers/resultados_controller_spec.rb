@@ -17,7 +17,10 @@ RSpec.describe ResultadosController, type: :controller do
     it "returns a success response" do
       resultado = Resultado.create! valid_attributes
       get :index, params: {}, session: valid_session
+      json_response = JSON.parse(response.body)
+
       expect(response).to be_successful
+      expect(json_response['resultados']).to include(JSON.parse(resultado.to_json))
     end
   end
 
@@ -25,7 +28,17 @@ RSpec.describe ResultadosController, type: :controller do
     it "returns a success response" do
       resultado = Resultado.create! valid_attributes
       get :show, params: {id: resultado.to_param}, session: valid_session
+      json_response = JSON.parse(response.body)
+
       expect(response).to be_successful
+      expect(json_response['resultado']).to include(JSON.parse(resultado.to_json))
+    end
+
+    it "returns not a success response" do
+      get :show, params: {id: 99}, session: valid_session
+
+      expect(response).not_to be_successful
+      expect(response).to have_http_status(:not_found)
     end
   end
 
@@ -42,22 +55,22 @@ RSpec.describe ResultadosController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        {valor_realizado: 15}
       }
 
       it "updates the requested resultado" do
         resultado = Resultado.create! valid_attributes
+
         put :update, params: {id: resultado.to_param, resultado: new_attributes}, session: valid_session
+
         resultado.reload
-        skip("Add assertions for updated state")
-      end
 
-      it "renders a JSON response with the resultado" do
-        resultado = Resultado.create! valid_attributes
+        json_response = JSON.parse(response.body)
 
-        put :update, params: {id: resultado.to_param, resultado: valid_attributes}, session: valid_session
         expect(response).to have_http_status(:ok)
         expect(response.content_type).to eq('application/json')
+        expect(json_response['location']).to include(JSON.parse(resultado.to_json))
+        expect(resultado.valor_realizado).to eq(15)
       end
     end
   end
@@ -73,7 +86,7 @@ RSpec.describe ResultadosController, type: :controller do
 
   describe "Teste final!" do
     it "qual a resposta para a vida o universo e tudo mais?" do
-      resposta = Base64.encode64("ESCREVA AQUI A RESPOSTA")
+      resposta = Base64.encode64("42")
       expect("NDI=\n").to eq(resposta)
     end
   end

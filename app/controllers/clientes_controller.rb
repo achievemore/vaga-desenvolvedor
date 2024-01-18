@@ -1,18 +1,14 @@
 class ClientesController < ApplicationController
   before_action :set_cliente, only: [:show, :edit, :update, :destroy]
+  rescue_from ActiveRecord::RecordNotFound, with: :not_found
 
   def index
     @clientes = Cliente.all
+    render json: {clientes: @clientes}
   end
 
   def show
-  end
-
-  def new
-    @cliente = Cliente.new
-  end
-
-  def edit
+    render json: {cliente: @cliente}
   end
 
   def create
@@ -47,5 +43,9 @@ class ClientesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def cliente_params
       params.require(:cliente).permit(:nome)
+    end
+
+    def not_found
+      render status: :not_found, json: { error: 'Registro não encontrado' }
     end
 end

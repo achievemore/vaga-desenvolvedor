@@ -12,7 +12,10 @@ RSpec.describe ClientesController, type: :controller do
     it "returns a success response" do
       cliente = Cliente.create! valid_attributes
       get :index, params: {}, session: valid_session
+      json_response = JSON.parse(response.body)
+
       expect(response).to be_successful
+      expect(json_response['clientes']).to include(JSON.parse(cliente.to_json))
     end
   end
 
@@ -20,7 +23,17 @@ RSpec.describe ClientesController, type: :controller do
     it "returns a success response" do
       cliente = Cliente.create! valid_attributes
       get :show, params: {id: cliente.to_param}, session: valid_session
+      json_response = JSON.parse(response.body)
+
       expect(response).to be_successful
+      expect(json_response['cliente']).to include(JSON.parse(cliente.to_json))
+    end
+
+    it "returns not a success response" do
+      get :show, params: {id: 99}, session: valid_session
+
+      expect(response).not_to be_successful
+      expect(response).to have_http_status(:not_found)
     end
   end
 
@@ -37,22 +50,20 @@ RSpec.describe ClientesController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        { nome: "Josué" }
       }
 
       it "updates the requested cliente" do
         cliente = Cliente.create! valid_attributes
         put :update, params: {id: cliente.to_param, cliente: new_attributes}, session: valid_session
         cliente.reload
-        skip("Add assertions for updated state")
-      end
 
-      it "renders a JSON response with the cliente" do
-        cliente = Cliente.create! valid_attributes
+        json_response = JSON.parse(response.body)
 
-        put :update, params: {id: cliente.to_param, cliente: valid_attributes}, session: valid_session
         expect(response).to have_http_status(:ok)
         expect(response.content_type).to eq('application/json')
+        expect(json_response['location']).to include(JSON.parse(cliente.to_json))
+        expect(cliente.nome).to eq("Josué")
       end
     end
   end

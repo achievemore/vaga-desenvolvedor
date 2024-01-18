@@ -1,18 +1,15 @@
 class ResultadosController < ApplicationController
   before_action :set_resultado, only: [:show, :edit, :update, :destroy]
+  rescue_from ActiveRecord::RecordNotFound, with: :not_found
 
   def index
     @resultados = Resultado.all
+
+    render json: {resultados: @resultados}
   end
 
   def show
-  end
-
-  def new
-    @resultado = Resultado.new
-  end
-
-  def edit
+    render json: { resultado: @resultado }
   end
 
   def create
@@ -46,6 +43,10 @@ class ResultadosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def resultado_params
-      params.require(:resultado).permit(:periodo, :valor_meta, :valor_realizado)
+      params.require(:resultado).permit(:cliente_id, :periodo, :valor_meta, :valor_realizado)
+    end
+
+    def not_found
+      render status: :not_found, json: { error: 'Registro não encontrado' }
     end
 end
