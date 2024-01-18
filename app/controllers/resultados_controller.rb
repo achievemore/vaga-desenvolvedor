@@ -12,13 +12,6 @@ class ResultadosController < ApplicationController
     render json: { resultado: @resultado }
   end
 
-  def new
-    @resultado = Resultado.new
-  end
-
-  def edit
-  end
-
   def create
     @resultado = Resultado.new(resultado_params)
 
