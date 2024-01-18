@@ -3,12 +3,14 @@ class ResultadosController < ApplicationController
 
   def index
     @resultados = Resultado.all
+
+    render json: @resultados, each_serializer: ResultadoSerializer
   end
 
   def show
     set_resultado
 
-    render json: @resultado
+    render json: ResultadoSerializer.new(@resultado, includes: :cliente)
   end
 
   def create

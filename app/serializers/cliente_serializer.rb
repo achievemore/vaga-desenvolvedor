@@ -1,3 +1,4 @@
-class ClienteSerializer < ActiveModel::Serializer
+class ClienteSerializer < ApplicationSerializer
+  type :cliente
   attributes :id, :nome
 end

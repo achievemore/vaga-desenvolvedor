@@ -3,12 +3,14 @@ class ClientesController < ApplicationController
 
   def index
     @clientes = Cliente.all
+
+    render json: @clientes, each_serializer: ClienteSerializer
   end
 
   def show
     set_cliente
 
-    render json: @cliente
+    render json: ClienteSerializer.new(@cliente)
   end
 
   def create

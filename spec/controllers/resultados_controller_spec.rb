@@ -23,7 +23,7 @@ RSpec.describe ResultadosController, type: :controller do
 
   describe "GET #show" do
     it "returns a success response" do
-      get :show, params: {id: resultado.to_param}
+      get :show, params: {id: resultado.id}
 
       expect(response).to be_successful
     end
