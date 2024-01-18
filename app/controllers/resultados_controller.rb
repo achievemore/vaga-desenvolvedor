@@ -1,18 +1,14 @@
 class ResultadosController < ApplicationController
-  before_action :set_resultado, only: [:show, :edit, :update, :destroy]
+  before_action :set_resultado, only: [:show, :update, :destroy]
 
   def index
     @resultados = Resultado.all
   end
 
   def show
-  end
+    set_resultado
 
-  def new
-    @resultado = Resultado.new
-  end
-
-  def edit
+    render json: @resultado
   end
 
   def create
@@ -46,6 +42,6 @@ class ResultadosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def resultado_params
-      params.require(:resultado).permit(:periodo, :valor_meta, :valor_realizado)
+      params.require(:resultado).permit(:cliente_id, :periodo, :valor_meta, :valor_realizado)
     end
 end
