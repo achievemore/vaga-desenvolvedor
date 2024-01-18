@@ -27,6 +27,12 @@ RSpec.describe ResultadosController, type: :controller do
 
       expect(response).to be_successful
     end
+
+    it "returns a not found response" do
+      get :show, params: {id: 12481632}, session: valid_session
+
+      expect(response).to have_http_status(:not_found)
+    end
   end
 
   describe "POST #create" do
