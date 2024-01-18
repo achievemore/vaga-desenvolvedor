@@ -13,13 +13,21 @@ RSpec.describe CalculosController, type: :controller do
     { cliente_id: cliente.id, periodo: Date.today, valor_meta: 0.0, valor_realizado: 12.7 }
   }
 
-  let(:valid_session) { {} }
+  describe "not authorized" do
+    it "returns a not found response" do
+      get :performance
+
+      expect(response).to have_http_status(:unauthorized)
+    end
+  end
 
   describe "GET #performance" do
+    include_context 'with authentication'
+
     it "com atributos validos" do
       resultado = Resultado.create! valid_attributes
 
-      get :performance, params: {valor_meta: resultado.valor_meta, valor_realizado: resultado.valor_realizado}, session: valid_session
+      get :performance, params: {valor_meta: resultado.valor_meta, valor_realizado: resultado.valor_realizado}
 
       expect(response).to be_successful
     end
@@ -27,7 +35,7 @@ RSpec.describe CalculosController, type: :controller do
     it "com atributos inválidos" do
       resultado = Resultado.create! valid_attributes
 
-      get :performance, params: {valor_meta: resultado.valor_meta, valor_realizado: resultado.valor_realizado}, session: valid_session
+      get :performance, params: {valor_meta: resultado.valor_meta, valor_realizado: resultado.valor_realizado}
 
       expect(response).to be_successful
     end
