@@ -1,0 +1,2 @@
+#!/bin/sh
+docker run -d -v pwd:/app -p 3000:3000 --rm -w /app -it achievemore-ruby rails s -b 0.0.0.0
