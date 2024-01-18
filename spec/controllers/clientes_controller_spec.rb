@@ -11,7 +11,9 @@ RSpec.describe ClientesController, type: :controller do
   describe "GET #index" do
     it "returns a success response" do
       cliente = Cliente.create! valid_attributes
+
       get :index, params: {}, session: valid_session
+
       expect(response).to be_successful
     end
   end
@@ -19,7 +21,9 @@ RSpec.describe ClientesController, type: :controller do
   describe "GET #show" do
     it "returns a success response" do
       cliente = Cliente.create! valid_attributes
+
       get :show, params: {id: cliente.to_param}, session: valid_session
+
       expect(response).to be_successful
     end
   end
@@ -42,6 +46,7 @@ RSpec.describe ClientesController, type: :controller do
 
       it "updates the requested cliente" do
         cliente = Cliente.create! valid_attributes
+
         put :update, params: {id: cliente.to_param, cliente: new_attributes}, session: valid_session
         cliente.reload
 
