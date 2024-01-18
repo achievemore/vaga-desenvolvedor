@@ -1,3 +1,5 @@
+require 'csv'
+
 class ImportaArquivos
   def self.importa_arquivo(arquivo)
     @arquivo = arquivo
