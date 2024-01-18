@@ -6,13 +6,9 @@ class ClientesController < ApplicationController
   end
 
   def show
-  end
+    set_cliente
 
-  def new
-    @cliente = Cliente.new
-  end
-
-  def edit
+    render json: @cliente
   end
 
   def create
