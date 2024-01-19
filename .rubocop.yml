@@ -1,0 +1,12 @@
+inherit_from: .rubocop_todo.yml
+
+AllCops:
+  NewCops: enable
+  SuggestExtensions: false
+
+Style/NumericLiterals:
+  Exclude:
+    - db/schema.rb
+
+Methods/BlockLength:
+  Max: 100
