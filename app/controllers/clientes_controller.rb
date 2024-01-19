@@ -1,5 +1,5 @@
 class ClientesController < ApplicationController
-  before_action :set_cliente, only: [:show, :edit, :update, :destroy]
+  before_action :set_cliente, only: [:show, :update, :destroy]
 
   def index
     @clientes = Cliente.all
@@ -8,26 +8,24 @@ class ClientesController < ApplicationController
   end
 
   def show
-    set_cliente
-
     render json: ClienteSerializer.new(@cliente)
   end
 
   def create
-    @cliente = Cliente.new(cliente_params)
+    @cliente = Cliente.new(cliente_params.compact_blank)
 
     if @cliente.save
-      render json: { status: :created, location: @cliente }
+      render json: @cliente, location: @cliente, status: :created
     else
-      render json: { errors: @cliente.errors, status: :unprocessable_entity }
+      render json: { errors: @cliente.errors }, status: :unprocessable_entity
     end
   end
 
   def update
     if @cliente.update(cliente_params)
-      render json: { status: :ok, location: @cliente }
+      render json: @cliente, location: @cliente, status: :ok
     else
-      render json: { errors: @cliente.errors, status: :unprocessable_entity }
+      render json: { errors: @cliente.errors }, status: :unprocessable_entity
     end
   end
 

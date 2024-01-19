@@ -58,6 +58,16 @@ RSpec.describe ResultadosController, type: :controller do
         }.to change(Resultado, :count).by(1)
       end
     end
+
+    context "with invalid params" do
+      it "renders a JSON response with errors for the new resultado", :aggregate_failures do
+        post :create, params: { resultado: { valor_meta: nil } }
+
+        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response.content_type).to include('application/json')
+        expect(json['errors']['valor_meta']).to include("can't be blank")
+      end
+    end
   end
 
   describe "PUT #update" do
@@ -82,6 +92,16 @@ RSpec.describe ResultadosController, type: :controller do
 
         expect(response).to have_http_status(:ok)
         expect(response.content_type).to include('application/json')
+      end
+    end
+
+    context "with invalid params" do
+      it "renders a JSON response with errors for the resultado", :aggregate_failures do
+        put :update, params: {id: resultado.to_param, resultado: { valor_meta: nil } }
+
+        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response.content_type).to include('application/json')
+        expect(json['errors']['valor_meta']).to include("can't be blank")
       end
     end
   end

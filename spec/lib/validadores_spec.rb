@@ -2,6 +2,32 @@ require 'validadores'
 
 RSpec.describe Validadores, type: :lib do
   describe "Validadores" do
+    context "periodo" do
+      it "validador para o formato YYYYMM" do
+        periodo = Validadores.match_periodo('201912')
+
+        expect(periodo).to eq(Date.new(2019, 12, 1))
+      end
+
+      it "validador para o formato YYYY-mm" do
+        periodo = Validadores.match_periodo('2019-12')
+
+        expect(periodo).to eq(Date.new(2019, 12, 1))
+      end
+
+      it "validador para o formato DD/MM/YYYY" do
+        periodo = Validadores.match_periodo('12/12/2019')
+
+        expect(periodo).to be_nil
+      end
+
+      it "validador para o formato DD-MM-YYYY" do
+        periodo = Validadores.match_periodo('12-12-2019')
+
+        expect(periodo).to be_nil
+      end
+    end
+
     context "data" do
       it "validador data (YYYY-MM-DD)" do
         data = Validadores.data('2019-12-12')

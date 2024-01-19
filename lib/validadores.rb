@@ -1,11 +1,12 @@
 class Validadores
-  def match_periodo(periodo)
+  def self.match_periodo(periodo)
     case periodo
     when /(^(19|20)\d{2})((0[1-9])|(1[0-2])$)/ # YYYYMM
       format_str = '%Y%m'
     when /(^(19|20)\d{2})[\-]((0?[1-9]|1[012]){1}$)/ # YYYY-mm
       format_str = '%Y-%m'
     end
+    return nil unless format_str
 
     Date.strptime(periodo, format_str)
   end
