@@ -1,4 +1,3 @@
-require 'rails_helper'
 require 'calculos'
 
 RSpec.describe Calculos, type: :lib do

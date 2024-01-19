@@ -1,16 +1,6 @@
-require 'rails_helper'
-
 RSpec.describe CalculosController, type: :controller do
   let(:cliente) {
     create(:cliente)
-  }
-
-  let(:valid_attributes) {
-    { cliente_id: cliente.id, periodo: Date.today, valor_meta: 10.5, valor_realizado: 12.7 }
-  }
-
-  let(:invalid_valid_attributes) {
-    { cliente_id: cliente.id, periodo: Date.today, valor_meta: 0.0, valor_realizado: 12.7 }
   }
 
   describe "not authorized" do
@@ -24,20 +14,22 @@ RSpec.describe CalculosController, type: :controller do
   describe "GET #performance" do
     include_context 'with authentication'
 
-    it "com atributos validos" do
-      resultado = Resultado.create! valid_attributes
+    it "com atributos validos", :aggregate_failures do
+      resultado = create(:resultado, cliente:, valor_meta: 10.5, valor_realizado: 12.7)
 
       get :performance, params: {valor_meta: resultado.valor_meta, valor_realizado: resultado.valor_realizado}
 
       expect(response).to be_successful
+      expect(json['valor_performance']).to eq(1.2095238095238094)
     end
 
-    it "com atributos inválidos" do
-      resultado = Resultado.create! valid_attributes
+    it "com atributos inválidos", :aggregate_failures do
+      resultado = create(:resultado, cliente:, valor_meta: 0, valor_realizado: 12.7)
 
       get :performance, params: {valor_meta: resultado.valor_meta, valor_realizado: resultado.valor_realizado}
 
       expect(response).to be_successful
+      expect(json['valor_performance']).to eq(0)
     end
   end
 end

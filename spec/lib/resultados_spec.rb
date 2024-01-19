@@ -1,4 +1,3 @@
-require 'rails_helper'
 require 'resultados'
 
 RSpec.describe Resultados, type: :lib do

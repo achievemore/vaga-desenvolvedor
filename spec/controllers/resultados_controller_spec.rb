@@ -1,5 +1,3 @@
-require 'rails_helper'
-
 RSpec.describe ResultadosController, type: :controller do
   let(:cliente) {
     create(:cliente)
@@ -22,20 +20,25 @@ RSpec.describe ResultadosController, type: :controller do
   describe "GET #index" do
     include_context 'with authentication'
 
-    it "returns a success response" do
-      get :index, params: {}
+    it "returns a success response", :aggregate_failures do
+      create_list(:resultado, 2, cliente:)
+      get :index, params: { cliente_id: cliente.id }
 
       expect(response).to be_successful
+      expect(json['resultados'].size).to eq(2)
     end
   end
 
   describe "GET #show" do
     include_context 'with authentication'
 
-    it "returns a success response" do
+    it "returns a success response", :aggregate_failures do
       get :show, params: {id: resultado.id}
 
       expect(response).to be_successful
+      expect(json['resultado']['id']).to eq(resultado.id)
+      expect(json['resultado']['valor_meta']).to eq("10.0")
+      expect(json['resultado']['valor_realizado']).to eq("12.0")
     end
 
     it "returns a not found response" do

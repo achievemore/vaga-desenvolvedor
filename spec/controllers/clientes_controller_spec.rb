@@ -1,5 +1,3 @@
-require 'rails_helper'
-
 RSpec.describe ClientesController, type: :controller do
 
   describe "not authorized" do
@@ -13,14 +11,15 @@ RSpec.describe ClientesController, type: :controller do
   describe "GET #index" do
     include_context 'with authentication'
 
-    it "returns a success response" do
+    it "returns a success response", :aggregate_failures do
       create_list(:cliente, 2)
       create(:cliente, nome: "AchieveMore")
 
       get :index, params: {}
 
       expect(response).to be_successful
-      expect(response.body).to include("AchieveMore")
+      expect(json['clientes'].size).to eq(3)
+      expect(json['clientes'].pluck('nome')).to include("AchieveMore")
     end
   end
 
@@ -33,6 +32,7 @@ RSpec.describe ClientesController, type: :controller do
       get :show, params: {id: cliente.to_param}
 
       expect(response).to be_successful
+      expect(json['cliente']['nome']).to eq(cliente.nome)
     end
 
     it "returns a not found response" do
