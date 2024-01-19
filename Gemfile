@@ -11,13 +11,14 @@ gem 'sqlite3', platform: :ruby
 
 group :development, :test do
   gem 'debug', '~> 1.0'
+  gem 'rubocop', require: false
 end
 
 group :test do
-  gem 'rspec-rails'
+  gem 'database_cleaner'
   gem 'faker'
   gem 'factory_bot'
-  gem 'database_cleaner'
+  gem 'rspec-rails'
 end
 
 group :development do
