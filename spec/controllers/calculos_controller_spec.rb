@@ -1,31 +1,35 @@
-require 'rails_helper'
-
 RSpec.describe CalculosController, type: :controller do
   let(:cliente) {
     create(:cliente)
   }
 
-  let(:valid_attributes) {
-    { cliente_id: cliente.id, periodo: Date.today, valor_meta: 10.5, valor_realizado: 12.7 }
-  }
+  describe "not authorized" do
+    it "returns a not found response" do
+      get :performance
 
-  let(:invalid_valid_attributes) {
-    { cliente_id: cliente.id, periodo: Date.today, valor_meta: 0.0, valor_realizado: 12.7 }
-  }
-
-  let(:valid_session) { {} }
+      expect(response).to have_http_status(:unauthorized)
+    end
+  end
 
   describe "GET #performance" do
-    it "com atributos validos" do
-      resultado = Resultado.create! valid_attributes
-      get :performance, params: {valor_meta: resultado.valor_meta, valor_realizado: resultado.valor_realizado}, session: valid_session
+    include_context 'with authentication'
+
+    it "com atributos validos", :aggregate_failures do
+      resultado = create(:resultado, cliente:, valor_meta: 10.5, valor_realizado: 12.7)
+
+      get :performance, params: {valor_meta: resultado.valor_meta, valor_realizado: resultado.valor_realizado}
+
       expect(response).to be_successful
+      expect(json['valor_performance']).to eq(1.2095238095238094)
     end
 
-    it "com atributos inválidos" do
-      resultado = Resultado.create! valid_attributes
-      get :performance, params: {valor_meta: resultado.valor_meta, valor_realizado: resultado.valor_realizado}, session: valid_session
+    it "com atributos inválidos", :aggregate_failures do
+      resultado = create(:resultado, cliente:, valor_meta: 0, valor_realizado: 12.7)
+
+      get :performance, params: {valor_meta: resultado.valor_meta, valor_realizado: resultado.valor_realizado}
+
       expect(response).to be_successful
+      expect(json['valor_performance']).to eq(0)
     end
   end
 end

@@ -3,6 +3,22 @@ name: Main
 on: [push]
 
 jobs:
+  quality:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.1.2
+          bundler-cache: true
+
+      - name: Run rubocop
+        run: |
+          bundle exec rubocop
+
   test:
     runs-on: ubuntu-latest
     strategy:
@@ -17,7 +33,7 @@ jobs:
         ci_node_index: [0, 1]
     env:
       RAILS_ENV: test
-      GEMFILE_RUBY_VERSION: 2.6.9
+      GEMFILE_RUBY_VERSION: 3.1.2
 
     steps:
       - uses: actions/checkout@v2
@@ -26,7 +42,7 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           # Not needed with a .ruby-version file
-          ruby-version: 2.6.9
+          ruby-version: 3.1.2
           # runs 'bundle install' and caches installed gems automatically
           bundler-cache: true
 

@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :cliente do
-    nome { "AchieveMore" }
+    nome { Faker::Name.name }
   end
 end
