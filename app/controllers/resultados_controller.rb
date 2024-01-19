@@ -2,7 +2,7 @@ class ResultadosController < ApplicationController
   before_action :set_resultado, only: [:show, :update, :destroy]
 
   def index
-    @resultados = Resultado.all
+    @resultados = Resultado.includes(:cliente).all
 
     render json: @resultados, each_serializer: ResultadoSerializer
   end

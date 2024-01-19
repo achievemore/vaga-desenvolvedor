@@ -1,4 +1,3 @@
-require 'rails_helper'
 require 'csv'
 
 include ActionDispatch::TestProcess::FixtureFile
