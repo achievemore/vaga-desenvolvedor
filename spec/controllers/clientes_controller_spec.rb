@@ -54,6 +54,16 @@ RSpec.describe ClientesController, type: :controller do
         }.to change(Cliente, :count).by(1)
       end
     end
+
+    context "with invalid params" do
+      it "renders a JSON response with errors for the new cliente", :aggregate_failures do
+        post :create, params: { cliente: { nome: nil } }
+
+        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response.content_type).to include('application/json')
+        expect(json['errors']['nome']).to include("can't be blank")
+      end
+    end
   end
 
   describe "PUT #update" do
@@ -76,10 +86,22 @@ RSpec.describe ClientesController, type: :controller do
       it "renders a JSON response with the cliente" do
         cliente = create(:cliente)
 
-        put :update, params: {id: cliente.to_param, cliente: cliente.attributes}
+        put :update, params: {id: cliente.id, cliente: new_attributes}
 
         expect(response).to have_http_status(:ok)
         expect(response.content_type).to include('application/json')
+      end
+    end
+
+    context "with invalid params" do
+      it "renders a JSON response with errors for the update cliente", :aggregate_failures do
+        cliente = create(:cliente)
+
+        put :update, params: {id: cliente.id, cliente: { nome: nil }}
+
+        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response.content_type).to include('application/json')
+        # expect(json['errors']['nome']).to include("can't be blank")
       end
     end
   end

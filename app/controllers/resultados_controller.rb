@@ -8,26 +8,24 @@ class ResultadosController < ApplicationController
   end
 
   def show
-    set_resultado
-
     render json: ResultadoSerializer.new(@resultado, includes: :cliente)
   end
 
   def create
-    @resultado = Resultado.new(resultado_params)
+    @resultado = Resultado.new(resultado_params.compact_blank)
 
     if @resultado.save
-      render json: { status: :created, location: @resultado }
+      render json: @resultado, status: :created, location: @resultado
     else
-      render json: { errors: @resultado.errors, status: :unprocessable_entity }
+      render json: { errors: @resultado.errors }, status: :unprocessable_entity
     end
   end
 
   def update
     if @resultado.update(resultado_params)
-      render json: { status: :ok, location: @resultado }
+      render json: @resultado, location: @resultado, status: :ok
     else
-      render json: { errors: @resultado.errors, status: :unprocessable_entity }
+      render json: { errors: @resultado.errors }, status: :unprocessable_entity
     end
   end
 
