@@ -4,38 +4,98 @@ require 'validadores'
 RSpec.describe Validadores, type: :lib do
   describe "Validadores" do
     context "data" do
-      it "validador data (YYYY-MM-DD)" do
-        data = Validadores.data('2019-31-12')
+      it "válida em formato (YYYY-MM-DD)" do
+        data = Validadores.data('2019-12-31')
 
         expect(data).to eq(true)
       end
 
-      it "validador data (YYYY-MM)" do
-        skip("escreva testes para esses casos")
+      it "válida em formato (YYYY-MM)" do
+        data = Validadores.data('2019-12')
+
+        expect(data).to eq(true)
       end
 
-      it "validador para data (DD/MM/YYYY)" do
-        skip("escreva testes para esses casos")
+      it "válida em formato (YYYY/MM/DD)" do
+        data = Validadores.data('2019/12/31')
+
+        expect(data).to eq(true)
+      end
+
+      it "válida em formato (YYYY/MM)" do
+        data = Validadores.data('2019/12')
+
+        expect(data).to eq(true)
+      end
+
+      it "válida em formato (DD-MM-YYYY)" do
+        data = Validadores.data('31-12-2019')
+
+        expect(data).to eq(true)
+      end
+
+      it "válida em formato (MM-YYYY)" do
+        data = Validadores.data('12-2019')
+
+        expect(data).to eq(true)
+      end
+
+      it "válida em formato (DD/MM/YYYY)" do
+        data = Validadores.data('31/12/2019')
+
+        expect(data).to eq(true)
+      end
+
+      it "válida em formato (MM/YYYY)" do
+        data = Validadores.data('12/2019')
+
+        expect(data).to eq(true)
       end
     end
 
     context "número" do
-      it "validador número inteiro" do
-        skip("escreva testes para esses casos")
+      it "inteiro" do
+        numero = Validadores.valor('40')
+
+        expect(numero).to eq(true)
       end
 
-      it "validador número decimal" do
-        skip("escreva testes para esses casos")
+      it "decimal com '.'" do
+        numero = Validadores.valor('13.05054654654')
+
+        expect(numero).to eq(true)
       end
 
-      it "validador número percentual" do
-        skip("escreva testes para esses casos")
+      it "decimal com ','" do
+        numero = Validadores.valor('13.05054654654')
+
+        expect(numero).to eq(true)
+      end
+
+      it "percentual com '.'" do
+        numero = Validadores.valor('98.93%')
+
+        expect(numero).to eq(true)
+      end
+
+      it "percentual com ','" do
+        numero = Validadores.valor('98,93%')
+
+        expect(numero).to eq(true)
       end
     end
 
-    context "diversos" do
-      it "validador e-mail" do
-        skip("escreva testes para esses casos")
+    context "email" do
+      it "válido" do
+        email = Validadores.email('email.exemplo')
+
+        expect(email).to eq(false)
+      end
+
+      it "inválido" do
+        email = Validadores.email('teste.exemplo@gmail.com')
+
+        expect(email).to eq(true)
       end
     end
   end
