@@ -1,4 +1,6 @@
 log/*
 tmp/*
-db/development.sqlite3
-db/test.sqlite3
+db/development.sqlite3*
+db/test.sqlite3*
+.byebug_history
+.rvmrc

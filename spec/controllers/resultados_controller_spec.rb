@@ -52,7 +52,7 @@ RSpec.describe ResultadosController, type: :controller do
         parsed_body = JSON.parse(response.body)
 
         expect(response).to have_http_status(:ok)
-        expect(response.content_type).to eq('application/json')
+        expect(response.content_type).to eq('application/json; charset=utf-8')
         expect(parsed_body['location']['valor_meta'].to_f).to eq(20)
         expect(parsed_body['location']['valor_realizado'].to_f).to eq(22)
         expect(parsed_body['location']['periodo']).to eq(Date.yesterday.strftime('%Y-%m-%d'))
@@ -63,7 +63,7 @@ RSpec.describe ResultadosController, type: :controller do
 
         put :update, params: {id: resultado.to_param, resultado: valid_attributes}, session: valid_session
         expect(response).to have_http_status(:ok)
-        expect(response.content_type).to eq('application/json')
+        expect(response.content_type).to eq('application/json; charset=utf-8')
       end
     end
   end
