@@ -6,7 +6,7 @@ RSpec.describe Calculos, type: :lib do
     it "com atributos validos" do
       valor_performance = Calculos.performance(100.5, 150.5)
 
-      expect(valor_performance).to eq(1.497512437810945)
+      expect(valor_performance).to eq(1.4975124378)
     end
 
     it "com valor realizado valido e meta zero" do
