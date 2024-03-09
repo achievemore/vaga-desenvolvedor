@@ -1,10 +1,10 @@
-FROM --platform=linux/x86_64 ruby:2.6-alpine
+FROM --platform=linux/x86_64 ruby:3.1-alpine
 
-LABEL Name=achievemore-ruby Version=2.6
+LABEL Name=achievemore-ruby Version=3.1
 
 WORKDIR /app
 
-RUN gem update bundler
+RUN gem install bundler
 
 RUN apk --update --upgrade --no-cache add \
     build-base \
