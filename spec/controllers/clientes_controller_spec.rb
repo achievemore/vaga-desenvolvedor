@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'json'
 
 RSpec.describe ClientesController, type: :controller do
 
@@ -37,14 +38,19 @@ RSpec.describe ClientesController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        { nome: 'AchieveMoreNovo' }
       }
 
       it "updates the requested cliente" do
         cliente = Cliente.create! valid_attributes
+
         put :update, params: {id: cliente.to_param, cliente: new_attributes}, session: valid_session
         cliente.reload
-        skip("Add assertions for updated state")
+        parsed_body = JSON.parse(response.body)
+
+        expect(response).to have_http_status(:ok)
+        expect(response.content_type).to eq('application/json')
+        expect(parsed_body['location']['nome']).to eq('AchieveMoreNovo')
       end
 
       it "renders a JSON response with the cliente" do
